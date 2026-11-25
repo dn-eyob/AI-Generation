@@ -1,0 +1,13 @@
+{
+  "input_hash": "f77abb0c19b13673",
+  "stage": "script",
+  "shot_id": null,
+  "provider": "google",
+  "model": "gemini-3.8-flash",
+  "seed": null,
+  "parameters": {
+    "temperature": 0.8,
+    "response_mime_type": "application/json"
+  },
+  "created": "2026-11-25T21:48:52+00:00"
+}

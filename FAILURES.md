@@ -26,3 +26,11 @@ What broke, what I tried, and what fixed it (or how I worked around it).
   - **The TTS docs moved** from `ai.google.dev/gemini-api/docs/speech-generation` (301 redirect) to `aistudio.google.com/docs/speech-generation`, and the documented call is now the **Interactions API** (`client.interactions.create`), not `generate_content`. Unary responses are WAV, 24 kHz, mono, 16-bit.
   - **FLUX.2 klein 4B's request fields are undocumented** on its Cloudflare model page (schema shows only an opaque `multipart` object). I tried the standard FLUX field names (`prompt`, `width`, `height`, `seed`) as multipart/form-data and it **worked** (12.4 s, 512×512). FLUX.1 schnell uses JSON (`prompt`, `steps` ≤ 8) and has **no seed parameter**, which matters for reproducibility.
 - **Resolution:** model IDs are pinned in code with the date and source they were verified against.
+
+### F-03 — Storyboard draft: 503 again, then a 343-second response
+- **Date / stage:** 2026-11-26, script stage (`python -m pipeline.script`)
+- **Symptom:** first attempt on `gemini-3.8-flash` → 503 high demand; after the 30 s overload wait, attempt 2 succeeded but took **342.9 s** for one JSON storyboard (the smoke-test reply took ~2 s on 3.5 Flash).
+- **Cause:** provider load on the free tier, plus a long structured output (10 shots, Amharic + English).
+- **What worked:** the retry policy from F-01 (30 s wait on 503) recovered without needing the fallback model. The fallback chain (`3.8-flash` → `3.5-flash`) stays in place.
+- **Lesson:** the text stage is cached by input hash, so this slow call is paid **once**; re-runs with an unchanged DESIGN.md beats section are instant cache hits.
+- **Evidence:** `runs.jsonl`, stage `script` (one `retry`, one `ok` with `latency_sec` ≈ 342.9).

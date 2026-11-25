@@ -1,0 +1,13 @@
+{
+  "input_hash": "c8bf080dbbafbb39",
+  "stage": "narration",
+  "shot_id": "s07",
+  "provider": "google",
+  "model": "gemini-3.8-flash-tts",
+  "seed": null,
+  "parameters": {
+    "voice": "Kore",
+    "style": "warm, calm, unhurried, like an elder telling a family story"
+  },
+  "created": "2026-11-25T21:55:07+00:00"
+}

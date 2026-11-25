@@ -44,3 +44,5 @@ The ceremony's own structure is the story structure: preparation, then the three
 ## 5. Storyboard revision log
 | Date | Shot | Change | Because |
 |---|---|---|---|
+| 2026-11-26 | all | v1 drafted by `pipeline/script.py` (Gemini 3.8 Flash) from section 2: 10 shots, 76 s + 3 s end card, 63 Amharic narration words, s05 left silent for the music | First draft for the radio cut. Reviewed and approved by me (native Amharic speaker) |
+| 2026-11-26 | s02 | v2: duration 7 s → 8 s (film 79 s → 80 s) | Measured narration (`outputs/narration/timings.json`): s02's line is 6.65 s; with 0.8 s breathing room it needs 7.45 s. Narration timing sets shot length |

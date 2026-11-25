@@ -148,6 +148,22 @@ def is_cached(output: Path, fingerprint: str) -> bool:
         return False
 
 
+def models_in_cache_order(models: list[str], output: Path) -> list[str]:
+    """Put the model that produced the existing `output` first, so an unchanged
+    input is a cache hit even when that output came from a fallback model."""
+    ordered = list(models)
+    meta = _meta_path(output)
+    if meta.exists():
+        try:
+            previous = json.loads(meta.read_text(encoding="utf-8")).get("model")
+        except (OSError, json.JSONDecodeError):
+            previous = None
+        if previous in ordered:
+            ordered.remove(previous)
+            ordered.insert(0, previous)
+    return ordered
+
+
 def _is_rate_limit(message: str) -> bool:
     """Quota / overload errors: retrying after 2s just hits the same wall,
     so these get the longer `rate_limit_delay` wait.
