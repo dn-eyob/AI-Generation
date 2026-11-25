@@ -84,6 +84,10 @@ def build_prompt(image_prompt: str, sb: dict, characters: list[str]) -> str:
     for c in sb["style"]["characters"]:
         if c["id"] in characters:
             parts.append(f"The {c['id']} is {c['description']}.")
+    lowered = image_prompt.lower()
+    for name, desc in sb["style"].get("object_glossary", {}).items():
+        if name.lower() in lowered:
+            parts.append(f"The {name} is {desc}.")
     parts.append(f"Style: {sb['style']['style_block']}.")
     parts.append("No text, no letters, no watermark.")
     return " ".join(parts)

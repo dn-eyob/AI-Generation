@@ -1,0 +1,12 @@
+{
+  "input_hash": "8f12817f1cc50da5",
+  "stage": "keyframes",
+  "shot_id": "s01",
+  "provider": "cloudflare",
+  "model": "@cf/black-forest-labs/flux-1-schnell",
+  "seed": null,
+  "parameters": {
+    "steps": 8
+  },
+  "created": "2026-11-25T23:26:19+00:00"
+}

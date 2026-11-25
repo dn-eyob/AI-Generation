@@ -1,7 +1,7 @@
 {
   "title": "Three Rounds",
   "title_native": "ሦስቱ ዙሮች",
-  "version": 3,
+  "version": 6,
   "logline": "Through the sacred ritual of three coffee rounds, an Ethiopian mother weaves together memory, family, and the enduring aroma of home across generations.",
   "language": {
     "narration": "am",
@@ -9,10 +9,14 @@
   },
   "style": {
     "style_block": "warm hand-painted gouache illustration, earthy browns, coffee-bean reds and soft golds, golden afternoon light through a window, gentle film grain, simple shapes, calm and intimate",
+    "object_glossary": {
+      "jebena": "a traditional Ethiopian black clay coffee pot with a round bulbous base, a long narrow neck, a small spout and a handle joining neck and body, resting upright on a small woven ring stand"
+    },
     "characters": [
       {
         "id": "mother",
-        "description": "a generic Ethiopian woman in her fifties with a kind face, hair wrapped in a white cotton netela shawl with a thin woven border, wearing a white habesha dress with a woven tibeb trim"
+        "description": "a generic Ethiopian woman in her fifties with a kind face, hair wrapped in a white cotton netela shawl with a thin woven border, wearing a white habesha dress with a woven tibeb trim",
+        "reference_image": "outputs/reference/schnell_2.png"
       }
     ]
   },
@@ -80,7 +84,7 @@
       "characters": [
         "mother"
       ],
-      "image_prompt": "Close-up centred on the mother's hands washing raw green coffee beans in a shallow bowl of clear water, droplets catching the window light, fresh green grass around the bowl.",
+      "image_prompt": "Close-up of only the mother's hands and forearms, no face in frame, washing raw green coffee beans in a shallow bowl of clear water, white sleeves with a woven trim, droplets catching the window light, fresh green grass around the bowl.",
       "motion_prompt": "Water ripples gently as the hands stir the beans; camera static.",
       "camera": "static",
       "video_mode": "kenburns",
@@ -100,7 +104,7 @@
       "image_prompt": "Medium shot centered on the mother holding a round black roasting pan over glowing charcoal embers, shaking darkening coffee beans as thick, aromatic white smoke billows softly toward the window.",
       "motion_prompt": "Coffee roasting smoke billows softly upward as the camera tilts up slowly.",
       "camera": "tilt_up",
-      "video_mode": "kenburns",
+      "video_mode": "wan",
       "seed": 1003,
       "narration": "የቡናው ጢስ ሲወጣ፣ መጥሪያ ደወል አያስፈልገውም።",
       "subtitle": "When the roasted smoke rises, no words are needed to call us."
@@ -128,7 +132,9 @@
       "reason": "Shows grinding the roasted beans with the jebena boiling behind it: preparation detail plus a clear view of the jebena (User Test #1, P1 and P3).",
       "shot_size": "medium_close_up",
       "duration_sec": 8.0,
-      "characters": [],
+      "characters": [
+        "mother"
+      ],
       "image_prompt": "Centred medium close-up of the mother's hands pounding dark roasted coffee beans with a wooden pestle in a carved wooden mortar, a black clay jebena steaming on a small charcoal stove just behind.",
       "motion_prompt": "Steam drifts from the jebena spout as the camera pulls out slowly.",
       "camera": "pull_out",
@@ -149,7 +155,7 @@
       "image_prompt": "Medium shot centered on the mother pouring an uninterrupted dark stream of coffee from the jebena high above into several small cups in sequence, a bowl of white popcorn resting beside the tray.",
       "motion_prompt": "A continuous stream of dark coffee pours into cups as the camera pushes in slowly.",
       "camera": "push_in",
-      "video_mode": "kenburns",
+      "video_mode": "wan",
       "seed": 1006,
       "narration": "አቦል የመጀመሪያው ጽዋ፣ የጨዋታና የሳቅ መጀመሪያ ነው።",
       "subtitle": "Abol, the first round, sparks our laughter and shared stories."
@@ -178,7 +184,7 @@
       "characters": [
         "mother"
       ],
-      "image_prompt": "Medium composition centered on a carved wooden bowl heaped with white popcorn, surrounded by soft silhouettes and backs of listening family members seated closely, with the mother smiling softly in the background.",
+      "image_prompt": "Medium composition centred on a carved wooden bowl heaped with white popcorn on a low table, family members seen only from behind as soft dark silhouettes, the older mother smiling softly and slightly out of focus in the background.",
       "motion_prompt": "A silhouette hand reaches in to take popcorn while the camera holds static.",
       "camera": "static",
       "video_mode": "kenburns",
@@ -195,7 +201,7 @@
       "characters": [
         "mother"
       ],
-      "image_prompt": "Centered medium shot of the mother holding the third cup with both hands against her heart, her face radiant with tenderness and devotion as she offers a silent maternal prayer.",
+      "image_prompt": "Centred medium shot of the older mother, in her fifties with grey hair at her temples and gentle wrinkles, holding a small handle-less coffee cup with both hands against her heart, eyes softly closed in a silent blessing.",
       "motion_prompt": "The mother holds the cup securely as the camera pushes in slowly.",
       "camera": "push_in",
       "video_mode": "kenburns",

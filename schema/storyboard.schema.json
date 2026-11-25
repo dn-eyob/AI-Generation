@@ -31,6 +31,11 @@
           "type": "string", "minLength": 20,
           "description": "Fixed look description (medium, palette, light, texture) appended to EVERY image prompt to prevent style drift."
         },
+        "object_glossary": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 10 },
+          "description": "Fixed descriptions of culturally specific objects (e.g. jebena). When a prompt mentions the key, its description is appended, so models draw the real object instead of a generic look-alike."
+        },
         "characters": {
           "type": "array", "minItems": 1,
           "items": {

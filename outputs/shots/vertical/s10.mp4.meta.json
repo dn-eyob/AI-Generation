@@ -1,0 +1,16 @@
+{
+  "input_hash": "130580752c4438c3",
+  "stage": "shots",
+  "shot_id": "s10/vertical",
+  "provider": "local",
+  "model": "ffmpeg-kenburns",
+  "seed": null,
+  "parameters": {
+    "camera": "tilt_up",
+    "duration_sec": 12.0,
+    "aspect": "vertical",
+    "zoom": 0.12,
+    "fps": 24
+  },
+  "created": "2026-11-25T23:32:48+00:00"
+}

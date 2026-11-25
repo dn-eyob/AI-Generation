@@ -41,4 +41,20 @@ What broke, what I tried, and what fixed it (or how I worked around it).
 - **Cause (my bug):** the Gemini client had **no request timeout**. A stalled server response leaves the HTTP call waiting forever; retries only help if the call *fails*.
 - **Fix:** set `http_options={"timeout": 120000}` (2 min, in milliseconds; confirmed as a real `HttpOptions` field in google-genai 3.6.1) in `pipeline/gemini.py`. A stall now becomes an exception, which is logged as `retry` and retried with the overload wait.
 - **Lesson:** retries without timeouts are not resilience. Every network call needs both.
+
+### F-05 — Character consistency: identity drift, wrong ethnicity, and text inside images
+- **Date / stage:** 2026-11-26, reference sheet + keyframes
+- **Symptoms:**
+  1. FLUX.2 klein 4B drew the "Ethiopian woman" as a non-Ethiopian woman in both reference candidates (E-05).
+  2. With FLUX.1 schnell, **3 of 8 shots that show the mother drifted**: a young woman's face in a hands-only shot (s02), clear faces of family members who should be silhouettes (s08), and a different young woman in the emotional hero shot (s09).
+  3. Garbled text and signature-like marks in 4 of 10 frames, despite "No text, no letters, no watermark" in every prompt.
+  4. No model drew a real jebena (teapots and jugs instead).
+- **Cause:** FLUX.1 schnell on Cloudflare takes no seed and no reference image, so every image is an independent sample conditioned only on text. Generic words ("Ethiopian woman", "jebena") are under-specified; negative instructions ("no text") are weak in distilled models.
+- **What I tried / what worked:**
+  - Picked the model that held identity (schnell over klein) using a fair side-by-side comparison → E-05.
+  - **Object glossary** for the jebena → fixed (E-06).
+  - **Shot-level physical specificity** (age markers, "only hands, no face", "seen from behind") → fixed 3/3 drifted shots (E-07).
+  - Re-rolled frames with text: the large text went away; small corner marks remain but fall **outside the centre crops** for 9:16 and 16:9.
+- **Not solved:** wardrobe drift in s06 (pink shawl). Accepted: it reads as the same scene, and another re-roll risks losing a good pour.
+- **Evidence:** `runs.jsonl` stage `reference` and `keyframes`; `EXPERIMENTS.md` E-05 to E-07.
 - **Evidence:** `runs.jsonl` stage `narration` (s02 `ok` at 22:57:15 UTC, then a gap, then the re-run); process stopped manually.

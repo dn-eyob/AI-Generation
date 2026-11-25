@@ -34,7 +34,8 @@ subprocess.run(["huggingface-cli", "download", "Wan-AI/Wan2.2-TI2V-5B",
 import glob, json, time, uuid
 from datetime import datetime, timezone
 
-BUNDLE = glob.glob("/kaggle/input/*/storyboard.json")[0].rsplit("/", 1)[0]
+BUNDLE = glob.glob("/kaggle/input/**/storyboard.json", recursive=True)[0].rsplit("/", 1)[0]
+print("bundle folder:", BUNDLE)
 OUT = "/kaggle/working/out"; os.makedirs(f"{OUT}/wan", exist_ok=True)
 LOG = f"{OUT}/wan_runs.jsonl"
 sb = json.load(open(f"{BUNDLE}/storyboard.json", encoding="utf-8"))
@@ -58,21 +59,33 @@ for shot in [s for s in sb["shots"] if s.get("video_mode") == "wan"]:
         log(shot_id=shot["id"], status="skipped", error="time budget reached"); continue
     out_file = f"{OUT}/wan/{shot['id']}.mp4"
     prompt = f"{shot['motion_prompt']}. {sb['style']['style_block']}"
-    params = {"size": SIZE, "frame_num": FRAME_NUM, "sample_steps": SAMPLE_STEPS, "gpus": N_GPUS}
-    cmd = ["torchrun", f"--nproc_per_node={N_GPUS}", "generate.py", "--task", "ti2v-5B",
-           "--size", SIZE, "--ckpt_dir", "/kaggle/working/Wan2.2-TI2V-5B",
-           "--image", f"{BUNDLE}/keyframes/{shot['id']}.png", "--prompt", prompt,
-           "--frame_num", str(FRAME_NUM), "--sample_steps", str(SAMPLE_STEPS),
-           "--base_seed", str(shot["seed"]), "--save_file", out_file,
-           "--dit_fsdp", "--t5_fsdp", "--ulysses_size", str(N_GPUS)]
-    t0 = time.time()
-    proc = subprocess.run(cmd, cwd="/kaggle/working/Wan2.2", capture_output=True, text=True)
-    secs = round(time.time() - t0, 1)
-    ok = proc.returncode == 0 and os.path.exists(out_file)
-    log(shot_id=shot["id"], status="ok" if ok else "error", seed=shot["seed"], parameters=params,
-        latency_sec=secs, gpu_minutes=round(secs * N_GPUS / 60, 2),
-        output=f"outputs/wan/{shot['id']}.mp4" if ok else None,
-        error=None if ok else proc.stderr[-800:], notes="Kaggle 2x T4")
+    base = ["generate.py", "--task", "ti2v-5B", "--size", SIZE,
+            "--ckpt_dir", "/kaggle/working/Wan2.2-TI2V-5B",
+            "--image", f"{BUNDLE}/keyframes/{shot['id']}.png", "--prompt", prompt,
+            "--frame_num", str(FRAME_NUM), "--sample_steps", str(SAMPLE_STEPS),
+            "--base_seed", str(shot["seed"]), "--save_file", out_file]
+    # Attempt 1: split over both T4s (documented multi-GPU flags).
+    # Attempt 2: one T4 with the documented low-memory flags (official min is 24 GB, so may OOM).
+    attempts = [
+        ("2gpu_fsdp", N_GPUS, ["torchrun", f"--nproc_per_node={N_GPUS}", *base,
+                                "--dit_fsdp", "--t5_fsdp", "--ulysses_size", str(N_GPUS)]),
+        ("1gpu_offload", 1, ["python", *base, "--offload_model", "True",
+                             "--convert_model_dtype", "--t5_cpu"]),
+    ]
+    for n, (mode, gpus, cmd) in enumerate(attempts, start=1):
+        params = {"size": SIZE, "frame_num": FRAME_NUM, "sample_steps": SAMPLE_STEPS,
+                  "gpus": gpus, "mode": mode}
+        t0 = time.time()
+        proc = subprocess.run(cmd, cwd="/kaggle/working/Wan2.2", capture_output=True, text=True)
+        secs = round(time.time() - t0, 1)
+        ok = proc.returncode == 0 and os.path.exists(out_file)
+        log(shot_id=shot["id"], status="ok" if ok else ("retry" if n < len(attempts) else "error"),
+            attempt=n, seed=shot["seed"], parameters=params, latency_sec=secs,
+            gpu_minutes=round(secs * gpus / 60, 2),
+            output=f"outputs/wan/{shot['id']}.mp4" if ok else None,
+            error=None if ok else (proc.stderr or proc.stdout)[-800:], notes=f"Kaggle T4, {mode}")
+        if ok:
+            break
 
 # %% 4. Zip results -> download from the notebook's Output panel
 import shutil

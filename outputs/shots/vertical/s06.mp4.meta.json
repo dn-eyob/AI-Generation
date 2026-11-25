@@ -1,0 +1,16 @@
+{
+  "input_hash": "a7e0090526066650",
+  "stage": "shots",
+  "shot_id": "s06/vertical",
+  "provider": "local",
+  "model": "ffmpeg-kenburns",
+  "seed": null,
+  "parameters": {
+    "camera": "push_in",
+    "duration_sec": 8.0,
+    "aspect": "vertical",
+    "zoom": 0.12,
+    "fps": 24
+  },
+  "created": "2026-11-25T23:30:14+00:00"
+}

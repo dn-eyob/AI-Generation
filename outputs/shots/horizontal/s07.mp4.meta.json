@@ -1,0 +1,16 @@
+{
+  "input_hash": "4ff7a87eed717a32",
+  "stage": "shots",
+  "shot_id": "s07/horizontal",
+  "provider": "local",
+  "model": "ffmpeg-kenburns",
+  "seed": null,
+  "parameters": {
+    "camera": "pan_left",
+    "duration_sec": 7.0,
+    "aspect": "horizontal",
+    "zoom": 0.12,
+    "fps": 24
+  },
+  "created": "2026-11-25T23:31:01+00:00"
+}

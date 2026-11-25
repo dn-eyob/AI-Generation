@@ -1,0 +1,13 @@
+{
+  "input_hash": "89cc35133b76f9f2",
+  "stage": "reference",
+  "shot_id": "klein4b_2",
+  "provider": "cloudflare",
+  "model": "@cf/black-forest-labs/flux-2-klein-4b",
+  "seed": 7002,
+  "parameters": {
+    "width": 1024,
+    "height": 1024
+  },
+  "created": "2026-11-25T23:18:06+00:00"
+}

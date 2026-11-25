@@ -26,7 +26,8 @@ from acestep.handler import AceStepHandler
 from acestep.llm_inference import LLMHandler
 from acestep.inference import GenerationParams, GenerationConfig, generate_music
 
-BUNDLE = glob.glob("/kaggle/input/*/storyboard.json")[0].rsplit("/", 1)[0]
+BUNDLE = glob.glob("/kaggle/input/**/storyboard.json", recursive=True)[0].rsplit("/", 1)[0]
+print("bundle folder:", BUNDLE)
 OUT = "/kaggle/working/out"; os.makedirs(f"{OUT}/music", exist_ok=True)
 LOG = f"{OUT}/music_runs.jsonl"
 sb = json.load(open(f"{BUNDLE}/storyboard.json", encoding="utf-8"))
