@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dn-eyob/AI-Generation/schema/storyboard.schema.json",
+  "title": "Heritage Short storyboard",
+  "description": "The contract between every pipeline stage. Each stage reads this file; nothing creative is hidden in code.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "version", "language", "style", "defaults", "music", "shots"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "description": "Film title (English)." },
+    "title_native": { "type": "string", "description": "Film title in the narration language." },
+    "version": { "type": "integer", "minimum": 1, "description": "Bumped on every storyboard revision (logged in DESIGN.md)." },
+    "logline": { "type": "string" },
+
+    "language": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["narration", "subtitles"],
+      "properties": {
+        "narration": { "type": "string", "pattern": "^[a-z]{2,3}$", "description": "ISO 639 code of the spoken narration, e.g. 'am' for Amharic." },
+        "subtitles": { "type": "string", "pattern": "^[a-z]{2,3}$", "description": "ISO 639 code of the burned-in subtitles, e.g. 'en'." }
+      }
+    },
+
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["style_block", "characters"],
+      "properties": {
+        "style_block": {
+          "type": "string", "minLength": 20,
+          "description": "Fixed look description (medium, palette, light, texture) appended to EVERY image prompt to prevent style drift."
+        },
+        "characters": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "description"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+              "description": { "type": "string", "minLength": 20, "description": "Fixed, generic character description reused verbatim in every prompt that shows them. Never a real person." },
+              "reference_image": { "type": "string", "description": "Path to the approved golden reference (set in Phase 2)." }
+            }
+          }
+        }
+      }
+    },
+
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text_model", "tts_model", "tts_voice", "tts_style", "image_model", "fps"],
+      "properties": {
+        "text_model": { "type": "string" },
+        "text_fallback_model": { "type": "string" },
+        "tts_model": { "type": "string" },
+        "tts_voice": { "type": "string" },
+        "tts_style": { "type": "string", "description": "Plain-language delivery instruction, e.g. 'warm, calm, unhurried'." },
+        "image_model": { "type": "string" },
+        "video_model": { "type": "string" },
+        "fps": { "type": "integer", "minimum": 12, "maximum": 60 }
+      }
+    },
+
+    "music": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["caption", "cues"],
+      "properties": {
+        "caption": { "type": "string", "minLength": 10, "description": "Style, mood, instruments, texture for ACE-Step. Tempo/key go in their own fields." },
+        "tempo_bpm": { "type": "integer", "minimum": 40, "maximum": 200 },
+        "key": { "type": "string" },
+        "instrumental": { "type": "boolean", "default": true },
+        "seed": { "type": "integer" },
+        "cues": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "from_shot", "to_shot", "intent"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^m[0-9]{2}$" },
+              "from_shot": { "type": "string", "pattern": "^s[0-9]{2}$" },
+              "to_shot": { "type": "string", "pattern": "^s[0-9]{2}$" },
+              "intent": { "type": "string", "minLength": 5, "description": "What the music does here: starts, builds, drops, resolves." }
+            }
+          }
+        }
+      }
+    },
+
+    "shots": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "beat", "reason", "shot_size", "duration_sec", "image_prompt",
+                     "motion_prompt", "camera", "seed", "narration", "subtitle"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^s[0-9]{2}$", "description": "Stable shot id, e.g. s01. Used for caching and single-shot regeneration." },
+          "beat": { "type": "integer", "minimum": 1, "maximum": 5, "description": "Story beat from DESIGN.md section 2." },
+          "reason": { "type": "string", "minLength": 15, "description": "Why this shot exists, in one sentence." },
+          "shot_size": {
+            "type": "string",
+            "enum": ["extreme_wide", "wide", "medium", "medium_close_up", "close_up", "extreme_close_up", "insert"]
+          },
+          "duration_sec": { "type": "number", "minimum": 3, "maximum": 14, "description": "Planned length; assembly extends it if the measured narration is longer." },
+          "characters": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+            "description": "Character ids from style.characters that appear in this shot."
+          },
+          "image_prompt": { "type": "string", "minLength": 20, "description": "What the still shows (subject, action, setting, composition). The style block is appended automatically." },
+          "motion_prompt": { "type": "string", "minLength": 5, "description": "Motion and camera only, for image-to-video. Don't re-describe the subject." },
+          "camera": {
+            "type": "string",
+            "enum": ["static", "push_in", "pull_out", "pan_left", "pan_right", "tilt_up", "tilt_down"],
+            "description": "Also drives the Ken Burns fallback direction."
+          },
+          "video_mode": { "type": "string", "enum": ["kenburns", "wan"], "default": "kenburns" },
+          "seed": { "type": "integer", "minimum": 0 },
+          "narration": { "type": "string", "description": "Spoken line in the narration language. May be empty for a music-only shot." },
+          "subtitle": { "type": "string", "description": "English subtitle for this line. Empty only if narration is empty." }
+        }
+      }
+    }
+  }
+}
