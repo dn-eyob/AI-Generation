@@ -1,0 +1,13 @@
+{
+  "input_hash": "bee0f6f9d1854da8",
+  "stage": "smoke_test",
+  "shot_id": "tts_english",
+  "provider": "google",
+  "model": "gemini-3.8-flash-tts",
+  "seed": null,
+  "parameters": {
+    "voice": "Kore",
+    "style": "warm, calm, unhurried"
+  },
+  "created": "2026-11-25T16:08:55+00:00"
+}

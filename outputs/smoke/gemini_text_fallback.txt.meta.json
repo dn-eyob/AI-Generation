@@ -1,0 +1,10 @@
+{
+  "input_hash": "c9a29cb6c69255a2",
+  "stage": "smoke_test",
+  "shot_id": "gemini_text_fallback",
+  "provider": "google",
+  "model": "gemini-3.5-flash",
+  "seed": null,
+  "parameters": {},
+  "created": "2026-11-25T16:10:56+00:00"
+}

@@ -1,0 +1,20 @@
+# --- Secrets: NEVER commit ---
+.env
+.env.*
+!.env.example
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# --- Scratch / temporary build files ---
+outputs/tmp/
+*.log
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
