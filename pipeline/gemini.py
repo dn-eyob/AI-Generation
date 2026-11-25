@@ -17,11 +17,16 @@ from functools import lru_cache
 from pipeline.common import require_env
 
 
+# Hard per-request limit. Without it a stalled server response hangs forever and
+# the retry logic never runs (FAILURES.md F-04: s05 narration hung >10 min).
+REQUEST_TIMEOUT_MS = 120_000
+
+
 @lru_cache(maxsize=1)
 def client():
     from google import genai
     return genai.Client(api_key=require_env("GEMINI_API_KEY"),
-                        http_options={"api_version": "v1beta"})
+                        http_options={"api_version": "v1beta", "timeout": REQUEST_TIMEOUT_MS})
 
 
 def text_json(model: str, prompt: str, temperature: float = 0.8) -> tuple[dict, dict]:

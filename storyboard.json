@@ -1,7 +1,7 @@
 {
   "title": "Three Rounds",
   "title_native": "ሦስቱ ዙሮች",
-  "version": 2,
+  "version": 3,
   "logline": "Through the sacred ritual of three coffee rounds, an Ethiopian mother weaves together memory, family, and the enduring aroma of home across generations.",
   "language": {
     "narration": "am",
@@ -57,13 +57,13 @@
     {
       "id": "s01",
       "beat": 1,
-      "reason": "Establishes the quiet sanctity and intentionality of the preparation before the family arrives.",
+      "reason": "Opens on the ritual being prepared (grass, incense, cups) in one shot, so the story reaches the roasting smoke sooner (User Test #1, P1).",
       "shot_size": "wide",
       "duration_sec": 8.0,
       "characters": [
         "mother"
       ],
-      "image_prompt": "Centered wide view of the mother kneeling gracefully in the living room, scattering long blades of fresh green grass across the floor mat. Beside her rests a small clay incense burner with a thin, graceful plume of white smoke curling into the air.",
+      "image_prompt": "Centered wide view of the mother kneeling gracefully in the living room, scattering long blades of fresh green grass across the floor. Beside her rests a small clay incense burner with a thin, graceful plume of white smoke and a wooden tray of small white handle-less cups.",
       "motion_prompt": "Incense smoke curls upward slowly as the camera pushes in gently toward the mother.",
       "camera": "push_in",
       "video_mode": "kenburns",
@@ -73,20 +73,20 @@
     },
     {
       "id": "s02",
-      "beat": 1,
-      "reason": "Draws attention to the intimate, tactile care embedded in arranging the sacred ceremonial items.",
+      "beat": 2,
+      "reason": "Shows the first step of preparation, washing the green beans, which the audience asked to see (User Test #1, P1).",
       "shot_size": "close_up",
-      "duration_sec": 8.0,
+      "duration_sec": 7.0,
       "characters": [
         "mother"
       ],
-      "image_prompt": "Close-up centered on the mother's weathered, gentle hands carefully arranging small white ceramic handle-less cups on an ornate wooden coffee tray, surrounded by freshly scattered green grass.",
-      "motion_prompt": "Hands place a cup gently onto the tray while the camera pans slowly right.",
-      "camera": "pan_right",
+      "image_prompt": "Close-up centred on the mother's hands washing raw green coffee beans in a shallow bowl of clear water, droplets catching the window light, fresh green grass around the bowl.",
+      "motion_prompt": "Water ripples gently as the hands stir the beans; camera static.",
+      "camera": "static",
       "video_mode": "kenburns",
       "seed": 1002,
-      "narration": "ሲኒዎቹ በረከቦቱ ላይ ሲሰደሩ፣ ቤተሰብን በናፍቆት ይጠብቃሉ።",
-      "subtitle": "The cups are set on the tray, waiting with longing for family."
+      "narration": "በመጀመሪያ ጥሬው ቡና በንጹህ ውሃ ይታጠባል።",
+      "subtitle": "First, the green beans are washed in clean water."
     },
     {
       "id": "s03",
@@ -125,17 +125,17 @@
     {
       "id": "s05",
       "beat": 3,
-      "reason": "Provides a serene pause to appreciate the traditional craftsmanship and patient boiling process.",
-      "shot_size": "insert",
-      "duration_sec": 7.0,
+      "reason": "Shows grinding the roasted beans with the jebena boiling behind it: preparation detail plus a clear view of the jebena (User Test #1, P1 and P3).",
+      "shot_size": "medium_close_up",
+      "duration_sec": 8.0,
       "characters": [],
-      "image_prompt": "Centred insert shot of a traditional spherical black clay jebena resting on a charcoal stove, steam gently escaping from its spout, with a heavy carved wooden mortar resting nearby on green grass.",
-      "motion_prompt": "Steam pulses faintly from the jebena spout as the camera pulls out slowly.",
+      "image_prompt": "Centred medium close-up of the mother's hands pounding dark roasted coffee beans with a wooden pestle in a carved wooden mortar, a black clay jebena steaming on a small charcoal stove just behind.",
+      "motion_prompt": "Steam drifts from the jebena spout as the camera pulls out slowly.",
       "camera": "pull_out",
       "video_mode": "kenburns",
       "seed": 1005,
-      "narration": "",
-      "subtitle": ""
+      "narration": "የተቆላው ቡና በሙቀጫ ይወቀጣል፤ ጀበናውም ይፈላል።",
+      "subtitle": "The roasted beans are pounded, and the jebena comes to a boil."
     },
     {
       "id": "s06",
@@ -206,9 +206,9 @@
     {
       "id": "s10",
       "beat": 5,
-      "reason": "Lands the closing feeling of pride, anchoring the diaspora to the timeless smell of home.",
+      "reason": "Lands pride and warmth for family far from home; held longer so the final line and the rising smoke have room to settle (User Test #1, P2).",
       "shot_size": "wide",
-      "duration_sec": 9.0,
+      "duration_sec": 12.0,
       "characters": [
         "mother"
       ],

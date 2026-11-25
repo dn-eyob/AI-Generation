@@ -34,3 +34,11 @@ What broke, what I tried, and what fixed it (or how I worked around it).
 - **What worked:** the retry policy from F-01 (30 s wait on 503) recovered without needing the fallback model. The fallback chain (`3.8-flash` → `3.5-flash`) stays in place.
 - **Lesson:** the text stage is cached by input hash, so this slow call is paid **once**; re-runs with an unchanged DESIGN.md beats section are instant cache hits.
 - **Evidence:** `runs.jsonl`, stage `script` (one `retry`, one `ok` with `latency_sec` ≈ 342.9).
+
+### F-04 — A TTS call hung for more than 10 minutes, and the retries never fired
+- **Date / stage:** 2026-11-26, narration re-run for storyboard v3 (after User Test #1)
+- **Symptom:** s01 cached, s02 regenerated in 12.6 s, s03–s04 cached, then **s05 produced no log line for over 10 minutes**. No error was raised, so the retry/backoff logic in `common.cached_call` never ran.
+- **Cause (my bug):** the Gemini client had **no request timeout**. A stalled server response leaves the HTTP call waiting forever; retries only help if the call *fails*.
+- **Fix:** set `http_options={"timeout": 120000}` (2 min, in milliseconds; confirmed as a real `HttpOptions` field in google-genai 3.6.1) in `pipeline/gemini.py`. A stall now becomes an exception, which is logged as `retry` and retried with the overload wait.
+- **Lesson:** retries without timeouts are not resilience. Every network call needs both.
+- **Evidence:** `runs.jsonl` stage `narration` (s02 `ok` at 22:57:15 UTC, then a gap, then the re-run); process stopped manually.
