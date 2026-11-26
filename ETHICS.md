@@ -27,6 +27,7 @@ Every real person whose story, face, likeness or voice is used is listed here **
 | Moving shots | Wan 2.2 TI2V-5B (Kaggle) | Apache 2.0 | Usable |
 | Score (used) | Composed in code: `pipeline/music.py` (numpy synthesis, Tizita mode) | Original work, no third-party model, samples or recordings | Mine; usable without restriction |
 | Score (attempted, failed: FAILURES F-06) | ACE-Step 1.5 (Kaggle) | MIT; trained on licensed / royalty-free / synthetic data | Not used in the film |
+| Sound effects | Synthesised in code: `pipeline/sfx.py` (numpy) | Original work, no recordings, samples or sound libraries | Mine; usable without restriction |
 | Assembly | FFmpeg 9.1 (gyan.dev full build) | GPL (build) | Tool only; outputs are mine |
 | Placeholder music (radio cut only) | Generated with FFmpeg tone synthesis | n/a (generated) | Not in final film |
 

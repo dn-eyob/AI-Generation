@@ -51,12 +51,11 @@ The ceremony's own structure is the story structure: preparation, then the three
 See the revision log below. In short: merged the two opening shots, added a washing shot and a grinding shot, held the ending 3 s longer, and planned ceremony sound effects for Phase 3.
 
 ## 4. User test #2: near-final cut
-- Date:
-- Participants (anonymised, ≥3):
-- Method:
-- What they said:
-- Insights:
-- What changed:
+- **Status: not conducted** (as of 2026-11-26).
+- **Why:** deadline-day time pressure. I prioritised finishing the pipeline (score fallback after ACE-Step failed, sound effects, one-command run) over collecting a second round of feedback.
+- **What the near-final cut already responds to:** every User Test #1 request is addressed in v3–v7 (shorter opening, washing and grinding shots, longer ending, jebena and cups clearly shown, ceremony sounds).
+- **What I would test:** the same 5 questions on `outputs/final/three_rounds_vertical.mp4`, watched on a phone, with two specific checks: (1) do the sound effects help or distract under the Amharic voice, and (2) does the illustrated, pan-and-zoom look still land "pride and warmth" now that there are pictures?
+- **Honest cost:** without a second test I can't show that the v3–v7 changes actually worked for the audience; they are supported only by User Test #1 and my own review.
 
 ## 5. Storyboard revision log
 | Date | Shot | Change | Because |
@@ -68,5 +67,6 @@ See the revision log below. In short: merged the two opening shots, added a wash
 | 2026-11-26 | s05 | v3: silent jebena insert → **grinding in the wooden mortar, jebena steaming behind**, with a short line "…ይወቀጣል፤ ጀበናውም ይፈላል።" / "The roasted beans are pounded, and the jebena comes to a boil." | P1 (grinding) + P3: "make sure the jebena… and coffee preparation are clearly shown" |
 | 2026-11-26 | s10 | v3: 9 s → **12 s** | P2: "the ending could have a little more time"; P2 and P3 both remembered this line |
 | 2026-11-26 | (Phase 3) | Planned: quiet ceremony sound effects (roasting crackle, pouring, cups touching) under the narration | P2: "the familiar sounds of the ceremony". Needs a licensed or generated sound source; tracked for assembly |
+| 2026-11-26 | s02, s03, s05, s06, s07, s10 | v7: **ceremony sound effects added**, declared per shot in the new `sfx` field: wash (s02), roast crackle (s03), pestle thuds (s05), pour (s06), cup clinks (s07, s10). Synthesised in code (`pipeline/sfx.py`, no recordings or licences), mixed into the music bed so they duck under the narration | User Test #1, P2: "add the familiar sounds of the ceremony, such as coffee beans roasting, coffee being poured, and cups touching" |
 | 2026-11-26 | s02, s05 | v3 timing fix: s02 6 → 7 s, s05 7 → 8 s | Measured new narration: s02 5.40 s and s05 6.38 s, which need 6.20 s and 7.18 s with breathing room |
 | 2026-11-26 | all | v3 total: 10 shots, 80 s + 3 s end card = **83 s**; 68 narration words (60.9 s spoken, 76% of the film); radio cut rebuilt | |

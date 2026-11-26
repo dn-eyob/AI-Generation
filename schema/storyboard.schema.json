@@ -126,6 +126,11 @@
             "description": "Also drives the Ken Burns fallback direction."
           },
           "video_mode": { "type": "string", "enum": ["kenburns", "wan"], "default": "kenburns" },
+          "sfx": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["wash", "roast", "grind", "pour", "clink"] },
+            "description": "Quiet ceremony sound effects synthesised by pipeline/sfx.py and mixed under the narration (User Test #1, P2)."
+          },
           "seed": { "type": "integer", "minimum": 0 },
           "narration": { "type": "string", "description": "Spoken line in the narration language. May be empty for a music-only shot." },
           "subtitle": { "type": "string", "description": "English subtitle for this line. Empty only if narration is empty." }

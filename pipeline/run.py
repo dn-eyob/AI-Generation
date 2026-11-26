@@ -12,6 +12,7 @@ Stage order (each reads storyboard.json and writes to outputs/):
   3. keyframes  Cloudflare FLUX.1 schnell, one still per shot
   4. shots      Wan clip from Kaggle if present, else Ken Burns (FFmpeg), 9:16 + 16:9
   5. music      score composed in code; uses the chosen candidate (outputs/music/score.wav)
+  5b. sfx       ceremony sounds synthesised in code from each shot's "sfx" list
   6. assemble   mix, duck, two-pass loudness, subtitles, end card, both exports
 
 Every model call is logged to runs.jsonl. Because each output is cached by a hash
@@ -31,7 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:          # allow `python pipeline/run.py` as well as `-m`
     sys.path.insert(0, str(ROOT))
 
-from pipeline import assemble, keyframes, music, narration, script, shots, storyboard  # noqa: E402
+from pipeline import assemble, keyframes, music, narration, script, sfx, shots, storyboard  # noqa: E402
 from pipeline.common import StageError, runs_log_path  # noqa: E402
 
 
@@ -74,6 +75,7 @@ def main() -> int:
         if not music.SCORE.exists():
             print("      no score chosen yet -> assembling a rough cut with the placeholder drone "
                   "(choose with: python -m pipeline.music --choose B)")
+        print("[5b]  sfx");       sfx.run(force=a.force)
         print("[6/6] assemble");  outs = assemble.run(force=a.force)
     except (StageError, storyboard.StoryboardError) as exc:
         print(f"\nPIPELINE STOPPED: {exc}")

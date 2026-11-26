@@ -38,6 +38,8 @@ FPS = 24
 DUCK = {"threshold": 0.02, "ratio": 6, "attack": 300, "release": 1500}
 TARGET = {"I": -14.0, "TP": -1.0, "LRA": 11.0}
 VOICE_LUFS, MUSIC_LUFS = -16, -26
+SFX = OUTPUTS / "sfx" / "sfx.wav"
+SFX_GAIN = 1.0   # sfx.wav measures about -29 LUFS: ~13 dB under the voice, not ducked (E-10)
 
 # libass styles for SRT (script units are relative to a 384x288 canvas)
 SUB_STYLE = {
@@ -76,8 +78,9 @@ def total_seconds(sb: dict) -> float:
 
 
 # ------------------------------------------------------------------ audio
-def mix_graph(sb: dict, music_input: list[str]) -> tuple[list[str], str]:
-    """Inputs + filter graph producing [mix] (before final loudness)."""
+def mix_graph(sb: dict, music_input: list[str], sfx: Path | None = None) -> tuple[list[str], str]:
+    """Inputs + filter graph producing [mix] (before final loudness).
+    If `sfx` is given, the ceremony sounds join the music bed, so they duck under the voice too."""
     inputs, parts, segs = [], [], []
     for s in sb["shots"]:
         dur, wav, label = float(s["duration_sec"]), NARRATION_DIR / f"{s['id']}.wav", f"v{s['id']}"
@@ -104,15 +107,26 @@ def mix_graph(sb: dict, music_input: list[str]) -> tuple[list[str], str]:
         f"afade=t=in:d=2,afade=t=out:st={total - 4}:d=4[music]",
         f"[music][voice_key]sidechaincompress=threshold={DUCK['threshold']}:ratio={DUCK['ratio']}:"
         f"attack={DUCK['attack']}:release={DUCK['release']}[ducked]",
-        "[voice_mix][ducked]amix=inputs=2:duration=first:normalize=0[mix]",
     ]
+    if sfx:
+        # Effects sit beside the voice, NOT in the ducked bed: inside the bed they were
+        # ducked on top of being quiet and became inaudible (E-10).
+        sfx_idx = music_idx + 1
+        inputs += ["-i", str(sfx)]
+        parts += [
+            f"[{sfx_idx}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=duration={total},"
+            f"volume={SFX_GAIN}[sfx]",
+            "[voice_mix][ducked][sfx]amix=inputs=3:duration=first:normalize=0[mix]",
+        ]
+    else:
+        parts.append("[voice_mix][ducked]amix=inputs=2:duration=first:normalize=0[mix]")
     return inputs, ";".join(parts)
 
 
-def build_audio(sb: dict, music_input: list[str], out: Path) -> dict:
+def build_audio(sb: dict, music_input: list[str], out: Path, sfx: Path | None = None) -> dict:
     """Pre-mix, then two-pass loudnorm to TARGET. Writes a 48 kHz stereo WAV."""
     premix = out.with_name("premix.wav")
-    inputs, graph = mix_graph(sb, music_input)
+    inputs, graph = mix_graph(sb, music_input, sfx)
     ffmpeg([*inputs, "-filter_complex", graph, "-map", "[mix]", "-t", str(total_seconds(sb)),
             "-c:a", "pcm_s16le", str(premix)])
     # pass 1: measure
@@ -180,12 +194,15 @@ def run(force: bool = False) -> list[Path]:
     narration = {p.stem: file_hash(p) for p in sorted(NARRATION_DIR.glob("s*.wav"))}
     timing = [{k: s[k] for k in ("id", "duration_sec", "narration", "subtitle")} for s in sb["shots"]]
 
+    sfx = SFX if (SFX.exists() and any(s.get("sfx") for s in sb["shots"])) else None
     audio = WORK_DIR / f"{name}_audio.wav"
     ra = cached_call(stage="assemble_audio", shot_id=None, provider="local", model="ffmpeg",
                      parameters={"duck": DUCK, "target": TARGET, "voice_lufs": VOICE_LUFS,
-                                 "music_lufs": MUSIC_LUFS},
-                     seed=None, inputs={"narration": narration, "timing": timing, "music": music_id},
-                     output=audio, fn=lambda o: build_audio(sb, music_input, o), max_attempts=1, force=force)
+                                 "music_lufs": MUSIC_LUFS, "sfx_gain": SFX_GAIN if sfx else None},
+                     seed=None, inputs={"narration": narration, "timing": timing, "music": music_id,
+                                        "sfx": file_hash(sfx) if sfx else None},
+                     output=audio, fn=lambda o: build_audio(sb, music_input, o, sfx),
+                     max_attempts=1, force=force)
     print(f"audio: {ra.status} {ra.latency_sec:.1f}s  {ra.record.get('notes') or ''}")
 
     FINAL_DIR.mkdir(parents=True, exist_ok=True)

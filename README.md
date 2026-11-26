@@ -1,35 +1,116 @@
-# The Heritage Short — an AI film pipeline
+# Three Rounds (ሦስቱ ዙሮች): a heritage short, made by a pipeline
 
-A 60–90 second heritage film generated from one file, `storyboard.json`, by a reproducible multi-model pipeline.
+An 83-second illustrated film about my family's Ethiopian coffee ceremony, told through its three rounds (**Abol, Tona, Bereka**), with Amharic narration, English subtitles, an original score and a "Made with AI" end card, in **9:16 and 16:9**.
 
-> Status: **work in progress** (Phase 0 — setup).
+The film is generated from one file, [`storyboard.json`](storyboard.json), by a reproducible multi-model pipeline that runs at **$0** on free tiers.
 
-## What it does
-TODO — filled in Phase 5.
+| | |
+|---|---|
+| 🎬 Film (9:16) | TODO: public link |
+| 🎬 Film (16:9) | TODO: public link |
+| 🎥 Walkthrough (≤ 5 min) | TODO: public link |
+| Local files | `outputs/final/three_rounds_vertical.mp4`, `outputs/final/three_rounds_horizontal.mp4` |
 
-## Run it (one command)
-TODO — filled in Phase 3 (`python pipeline/run.py`).
+## Run it
 
-## Requirements
-- Python 3.11+
-- FFmpeg on your PATH
-- Free API keys: copy `.env.example` to `.env` and fill it in.
+```bash
+git clone https://github.com/dn-eyob/AI-Generation.git
+cd AI-Generation
+python -m venv .venv
+# Windows: .venv\Scripts\activate      macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env        # then fill in your keys (only needed to regenerate changed shots)
+
+python pipeline/run.py      # the whole film (or: make film)
+```
+
+**Requirements:** Python 3.11+ (tested on 3.15.2), [FFmpeg](https://ffmpeg.org/) on your PATH (tested on 9.1), and free API keys in `.env`:
+
+| Key | Where to get it | Used for |
+|---|---|---|
+| `GEMINI_API_KEY` | Google AI Studio → Get API key | script, narration (TTS) |
+| `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` | Cloudflare dashboard → Workers AI → Use REST API | keyframes |
+
+Generated outputs are committed and every stage is cached, so **an unchanged storyboard rebuilds without any API keys** (verified: 0 model calls, 11 s). Keys are only needed when you change something.
+
+### Change one shot, regenerate only that shot
+
+```bash
+# 1. edit one shot in storyboard.json, e.g. s04's "narration" or "image_prompt"
+# 2. then:
+python pipeline/run.py --shot s04          # or: make shot ID=s04
+```
+
+The run summary (computed from `runs.jsonl`) shows exactly which model calls were new; every other shot reports `cached`.
+
+### Other commands
+
+| Command | What it does |
+|---|---|
+| `python -m pipeline.storyboard` | validate `storyboard.json` against the schema and the timing rules |
+| `python -m pipeline.common --selftest` | prove logging, caching and retries work (no keys needed) |
+| `python -m pipeline.radio_cut` | narration + placeholder music on black (the User Test #1 prototype) |
+| `python -m pipeline.music [--choose B]` | compose 3 score candidates with previews under the narration; choose one |
+| `python -m pipeline.costs` | regenerate the cost/latency table in COSTS.md from `runs.jsonl` |
+| `python -m pipeline.check_secrets` | scan every file Git would upload for secret values |
+| `python -m pipeline.kaggle_io bundle` / `import <zip>` | move work to and from the Kaggle GPU notebooks |
+| `python -m experiments.tts_roundtrip` | Phase 4: Amharic / Tigrinya / Afaan Oromo / Somali TTS round-trip test |
+
+## How it works
+
+```
+DESIGN.md beats ─► script ─► storyboard.json ◄── schema (validated first, every run)
+                                   │
+       ┌──────────────┬────────────┼──────────────┬──────────────┐
+   narration       keyframes     music           sfx       (Wan on Kaggle, optional)
+ Gemini 3.8 TTS   FLUX.1 schnell  Tizita, code   code              │
+       │              │            │              │                │
+       │            shots (Ken Burns / Wan, 9:16 + 16:9) ◄─────────┘
+       └──────────────┴──────► assemble (FFmpeg) ◄┘
+                    duck · two-pass −14 LUFS · subtitles · AI end card
+                                   │
+                    three_rounds_{vertical,horizontal}.mp4
+         every call ─► runs.jsonl (model, params, seed, latency, cost, status)
+```
+
+Details: **[ARCHITECTURE.md](ARCHITECTURE.md)** (contracts, caching, failure handling).
+
+| Stage | Model / tool | Licence |
+|---|---|---|
+| Script, translation | Gemini 3.8 Flash (fallback 3.5 Flash), Google AI Studio free tier | Gemini API terms |
+| Narration (Amharic) | Gemini 3.8 Flash TTS, prebuilt voice "Kore" | Gemini API terms |
+| Keyframes | FLUX.1 [schnell] on Cloudflare Workers AI | Apache 2.0 |
+| Moving shots | FFmpeg Ken Burns (Wan 2.2 TI2V-5B notebook ready, not used: F-07) | GPL build / Apache 2.0 |
+| Score + sound effects | composed in code with numpy (ACE-Step 1.5 attempted, failed: F-06) | original |
+| Assembly | FFmpeg 9.1 | GPL build |
+
+## What it cost
+
+**$0 paid.** At paid-tier list prices the AI calls for the whole project come to **about $0.05**; most time is spent encoding video locally, not waiting on models. Generated table: [COSTS.md](COSTS.md).
+
+## Project documents
+
+| File | Contents |
+|---|---|
+| [DESIGN.md](DESIGN.md) | audience, intent, User Test #1 (3 people) and what changed because of it, storyboard revision log |
+| [EXPERIMENTS.md](EXPERIMENTS.md) | 10+ experiments: hypothesis → change → result |
+| [FAILURES.md](FAILURES.md) | what broke (503 overloads, a hung TTS call, identity drift, ACE-Step on Kaggle…) and what fixed it |
+| [COSTS.md](COSTS.md) | measured latency per stage, free-tier limits observed, list-price equivalent |
+| [ETHICS.md](ETHICS.md) | consent (no real person shown or voiced), licences, AI labelling plan |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | how the pipeline works |
 
 ## Repository layout
+
 | Path | Purpose |
 |---|---|
-| `storyboard.json` | The contract: shots, durations, prompts, references, narration, music cues |
-| `schema/` | JSON Schema for the storyboard, validated before every run |
-| `pipeline/` | One script per stage: script, keyframes, shots, music, narration, assemble |
-| `kaggle/` | GPU notebooks (Wan 2.2 video, ACE-Step music) run on Kaggle |
-| `runs.jsonl` | One log line per model call |
-| `outputs/` | Generated images, audio and video, kept so a run can be inspected |
-| `DESIGN.md` | Audience, intent, user tests and what changed because of them |
-| `ARCHITECTURE.md` | Stages, contracts, caching, failure handling |
-| `EXPERIMENTS.md` | Hypothesis → change → result |
-| `FAILURES.md` | What broke, what was tried, what fixed it |
-| `COSTS.md` | Measured latency and GPU minutes per stage, list-price equivalent |
-| `ETHICS.md` | Consent record, licences, labelling plan |
+| `storyboard.json` | the contract: shots, durations, prompts, references, narration, music cues, sound effects |
+| `schema/` | JSON Schema for the storyboard |
+| `pipeline/` | one script per stage + `common.py` (logging, caching, retries) + `run.py` |
+| `kaggle/` | GPU notebooks (Wan 2.2, ACE-Step 1.5) |
+| `experiments/` | Phase 4 ceiling experiment and its results |
+| `outputs/` | every generated file, with `.meta.json` fingerprints, kept so a run can be inspected |
+| `runs.jsonl` | one line per model call |
 
-## Cost
-TODO — summarised from `runs.jsonl` in Phase 5.
+## AI disclosure
+
+Every image, the narrator's voice and the score in this film are generated. The characters are illustrated and generic: no real person's face, likeness or voice appears. The film ends with a "Made with AI" card naming every model, and the platform AI label is switched on when posting.

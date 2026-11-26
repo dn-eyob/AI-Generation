@@ -51,6 +51,19 @@ def text_json(model: str, prompt: str, temperature: float = 0.8) -> tuple[dict, 
     return json.loads(raw), info
 
 
+def transcribe_json(model: str, wav: bytes, instruction: str) -> tuple[dict, dict]:
+    """Send audio + an instruction to a text model; expect JSON back."""
+    from google.genai import types
+    resp = client().models.generate_content(
+        model=model,
+        contents=[types.Part.from_bytes(data=wav, mime_type="audio/wav"), instruction],
+        config=types.GenerateContentConfig(response_mime_type="application/json", temperature=0.0),
+    )
+    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", (resp.text or "").strip())
+    usage = getattr(resp, "usage_metadata", None)
+    return json.loads(raw), {"total_tokens": getattr(usage, "total_token_count", None)}
+
+
 def tts_wav(model: str, text: str, voice: str, style: str) -> bytes:
     """Synthesize one line of speech. Returns WAV bytes."""
     interaction = client().interactions.create(

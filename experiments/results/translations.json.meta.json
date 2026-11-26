@@ -1,0 +1,12 @@
+{
+  "input_hash": "8ebc8738bccf303a",
+  "stage": "ceiling_translate",
+  "shot_id": null,
+  "provider": "google",
+  "model": "gemini-3.8-flash",
+  "seed": null,
+  "parameters": {
+    "temperature": 0.0
+  },
+  "created": "2026-11-26T02:17:29+00:00"
+}

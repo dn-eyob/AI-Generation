@@ -66,4 +66,19 @@ What broke, what I tried, and what fixed it (or how I worked around it).
 - **Trade-off:** the score is not AI-generated, so the open-weights music model is untested in this project. The end card credit was changed to say so honestly.
 - **Still open:** re-run ACE-Step with the error captured, then compare it against the code-composed score in a blind test (candidate ceiling experiment).
 - **Evidence:** `runs.jsonl` stage `music` (3 `ok` lines, provider `local`, model `numpy-tizita-synth-v1`).
+
+### F-07 — Wan 2.2 image-to-video was not run; the Ken Burns fallback carries every shot
+- **Date / stage:** 2026-11-26, moving shots
+- **Situation:** s03 (roasting smoke) and s06 (the pour) are marked `video_mode: "wan"`, and `kaggle/wan_shots.py` is ready (2× T4 multi-GPU attempt, then single-T4 low-memory attempt, 90-min timebox). After ACE-Step failed on Kaggle (F-06), I did not run the Wan notebook: no Wan clip, no Wan log lines.
+- **Known risk if run:** the official model card says TI2V-5B needs **≥ 24 GB VRAM** with offloading; a Kaggle T4 has 16 GB and no native bf16, so even the 2-GPU split was unproven.
+- **How the pipeline handled it:** exactly as designed. `pipeline/shots.py` found no `outputs/wan/s03.mp4` / `s06.mp4` and **fell back to Ken Burns automatically** (it prints "Wan clip missing -> Ken Burns fallback"). The film is complete without it.
+- **To finish later (Wan):** run `kaggle/wan_shots.py` on Kaggle, then `python -m pipeline.kaggle_io import <zip>` and `python pipeline/run.py`. Only s03/s06 clips and the final assembly would rebuild.
 - **Evidence:** `runs.jsonl` stage `narration` (s02 `ok` at 22:57:15 UTC, then a gap, then the re-run); process stopped manually.
+
+### F-08 — Primary AND fallback Gemini models both overloaded mid-experiment
+- **Date / stage:** 2026-11-26, Phase 4 ceiling experiment (`experiments/tts_roundtrip.py`)
+- **Symptom:** the translation call and the blind transcription calls got `503 UNAVAILABLE ... high demand` from `gemini-3.8-flash`, then from the fallback `gemini-3.5-flash` too. The run stopped after 1 of 12 transcriptions (Amharic s03: CER 0.241, language identified correctly). The TTS model kept working.
+- **Cause:** free-tier load on Google's side. A two-model fallback chain is not enough at peak times.
+- **Fix:** extended the chain to every Flash model my key lists (`3.8` → `3.7` → `3.6` → `3.5` → `3.5-flash-lite`, verified via `models.list()` on 2026-11-25). Because every call is cached, the re-run resumed where it stopped, with no repeated calls.
+- **Side effect, handled:** clips may now be transcribed by different models, which weakens the cross-language comparison. The results table records the transcriber per clip so a reader can see whether it varied.
+- **Evidence:** `runs.jsonl` stages `ceiling_translate`, `ceiling_asr` (`retry`/`error` lines, then `ok` with the model that answered).
