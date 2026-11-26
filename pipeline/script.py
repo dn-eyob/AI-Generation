@@ -56,7 +56,9 @@ SEED_BASE = 1000
 def read_beats() -> str:
     """Section 2 of DESIGN.md. Only this section feeds the hash, so editing
     user-test notes elsewhere in DESIGN.md does not trigger a regeneration."""
-    text = (ROOT / "DESIGN.md").read_text(encoding="utf-8")
+    # Normalise line endings: a Windows clone with autocrlf would otherwise change the
+    # hash and trigger a needless (key-requiring) Gemini call on an unchanged storyboard.
+    text = (ROOT / "DESIGN.md").read_text(encoding="utf-8").replace("\r\n", "\n")
     m = re.search(r"## 2\..*?(?=\n## 3\.)", text, flags=re.S)
     if not m:
         raise StageError("DESIGN.md has no '## 2.' story-beats section")
