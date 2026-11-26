@@ -1,10 +1,10 @@
 {
-  "input_hash": "e57986e306baf1f1",
+  "input_hash": "e139ccf68d559643",
   "stage": "music",
   "shot_id": "A",
   "provider": "local",
   "model": "numpy-tizita-synth-v1",
-  "seed": 4242,
+  "seed": 5151,
   "parameters": {
     "scale": "tizita_minor",
     "bpm": 66,
@@ -16,5 +16,5 @@
     "drone": 0.55,
     "version": "tizita-synth-v1"
   },
-  "created": "2026-11-26T01:16:04+00:00"
+  "created": "2026-11-26T09:59:41+00:00"
 }

@@ -1,6 +1,6 @@
-# Three Rounds (ሦስቱ ዙሮች): a heritage short, made by a pipeline
+# The King Who Built a Wonder in Stone (በድንጋይ ድንቅ የሠራው ንጉሥ): a heritage short, made by a pipeline
 
-An 83-second illustrated film about my family's Ethiopian coffee ceremony, told through its three rounds (**Abol, Tona, Bereka**), with Amharic narration, English subtitles, an original score and a "Made with AI" end card, in **9:16 and 16:9**.
+An 84.5-second illustrated film about **Lalibela**: King Lalibela's dream of a new Jerusalem, the craftsmen who carved eleven churches out of solid rock, and **Bete Giyorgis**, the cross carved into the earth. Amharic narration, English subtitles, an original score, quiet sound effects and a "Made with AI" end card, in **9:16 and 16:9**.
 
 The film is generated from one file, [`storyboard.json`](storyboard.json), by a reproducible multi-model pipeline that runs at **$0** on free tiers.
 
@@ -9,7 +9,9 @@ The film is generated from one file, [`storyboard.json`](storyboard.json), by a 
 | 🎬 Film (9:16) | TODO: public link |
 | 🎬 Film (16:9) | TODO: public link |
 | 🎥 Walkthrough (≤ 5 min) | TODO: public link |
-| Local files | `outputs/final/three_rounds_vertical.mp4`, `outputs/final/three_rounds_horizontal.mp4` |
+| Local files | `outputs/final/wonder_in_stone_vertical.mp4`, `outputs/final/wonder_in_stone_horizontal.mp4` |
+
+> **Story history:** the pipeline first made *Three Rounds*, a film about my family's coffee ceremony (storyboard v1–v7, User Test #1). Late in the project I changed the story to Lalibela (v8+); the reasons and honest consequences are in [DESIGN.md §6](DESIGN.md), and the first film is archived in [`archive/three_rounds/`](archive/three_rounds/). Same pipeline, new storyboard: the change itself shows the pipeline is reusable.
 
 ## Run it
 
@@ -47,7 +49,8 @@ The run summary (computed from `runs.jsonl`) shows exactly which model calls wer
 
 | Command | What it does |
 |---|---|
-| `python -m pipeline.storyboard` | validate `storyboard.json` against the schema and the timing rules |
+| `python -m pipeline.storyboard` | validate `storyboard.json` against the schema and the timing and subtitle-layout rules |
+| `python pipeline/run.py --draft` | also run the Gemini script stage (drafts a storyboard from DESIGN.md; never overwrites yours) |
 | `python -m pipeline.common --selftest` | prove logging, caching and retries work (no keys needed) |
 | `python -m pipeline.radio_cut` | narration + placeholder music on black (the User Test #1 prototype) |
 | `python -m pipeline.music [--choose B]` | compose 3 score candidates with previews under the narration; choose one |
@@ -69,7 +72,7 @@ DESIGN.md beats ─► script ─► storyboard.json ◄── schema (validated
        └──────────────┴──────► assemble (FFmpeg) ◄┘
                     duck · two-pass −14 LUFS · subtitles · AI end card
                                    │
-                    three_rounds_{vertical,horizontal}.mp4
+                    wonder_in_stone_{vertical,horizontal}.mp4
          every call ─► runs.jsonl (model, params, seed, latency, cost, status)
 ```
 
@@ -92,8 +95,8 @@ Details: **[ARCHITECTURE.md](ARCHITECTURE.md)** (contracts, caching, failure han
 
 | File | Contents |
 |---|---|
-| [DESIGN.md](DESIGN.md) | audience, intent, User Test #1 (3 people) and what changed because of it, storyboard revision log |
-| [EXPERIMENTS.md](EXPERIMENTS.md) | 10+ experiments: hypothesis → change → result |
+| [DESIGN.md](DESIGN.md) | audience, intent, User Test #1 (3 people) and what changed because of it, the story change to Lalibela (§6), revision logs |
+| [EXPERIMENTS.md](EXPERIMENTS.md) | 13+ experiments: hypothesis → change → result |
 | [FAILURES.md](FAILURES.md) | what broke (503 overloads, a hung TTS call, identity drift, ACE-Step on Kaggle…) and what fixed it |
 | [COSTS.md](COSTS.md) | measured latency per stage, free-tier limits observed, list-price equivalent |
 | [ETHICS.md](ETHICS.md) | consent (no real person shown or voiced), licences, AI labelling plan |
@@ -113,4 +116,4 @@ Details: **[ARCHITECTURE.md](ARCHITECTURE.md)** (contracts, caching, failure han
 
 ## AI disclosure
 
-Every image, the narrator's voice and the score in this film are generated. The characters are illustrated and generic: no real person's face, likeness or voice appears. The film ends with a "Made with AI" card naming every model, and the platform AI label is switched on when posting.
+Every image, the narrator's voice, the score and the sound effects in this film are generated. King Lalibela is a historical figure with no surviving likeness; he, the priests and the pilgrims are imagined, generic illustrations, and the images of the churches are artistic impressions, not documentation. No living person's face, likeness or voice appears. The film ends with a "Made with AI" card naming every model, and the platform AI label is switched on when posting.

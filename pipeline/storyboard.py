@@ -25,6 +25,8 @@ STORYBOARD_PATH = ROOT / "storyboard.json"
 MIN_TOTAL_SEC, MAX_TOTAL_SEC = 60, 90
 END_CARD_SEC = 3            # added by assembly; counts toward the total
 MAX_SUBTITLE_CHARS = 84     # about 2 lines x 42 characters
+VERTICAL_WRAP = 33          # wrap width used for 9:16 subtitles (assemble.SUB_STYLE)
+MAX_VERTICAL_LINE = 41      # longest line that fits the 9:16 frame at that font (measured, E-14)
 
 
 class StoryboardError(ValueError):
@@ -67,6 +69,12 @@ def rule_errors(data: dict) -> list[str]:
         if len(subtitle) > MAX_SUBTITLE_CHARS:
             errors.append(f"{sid}: subtitle is {len(subtitle)} chars (max {MAX_SUBTITLE_CHARS}); "
                           f"split the line or shorten it")
+        elif subtitle:
+            from pipeline.subtitles import wrap   # local import: subtitles is a leaf module
+            longest = max(len(line) for line in wrap(subtitle, VERTICAL_WRAP).split("\n"))
+            if longest > MAX_VERTICAL_LINE:
+                errors.append(f"{sid}: subtitle needs a {longest}-char line on the 9:16 frame "
+                              f"(max {MAX_VERTICAL_LINE}, or the player wraps it to 3 lines); shorten it")
 
     for cue in data.get("music", {}).get("cues", []):
         for key in ("from_shot", "to_shot"):

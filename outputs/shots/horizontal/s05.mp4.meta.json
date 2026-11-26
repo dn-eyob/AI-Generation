@@ -1,5 +1,5 @@
 {
-  "input_hash": "038373ae064d570c",
+  "input_hash": "b65b5a43292409a9",
   "stage": "shots",
   "shot_id": "s05/horizontal",
   "provider": "local",
@@ -7,11 +7,11 @@
   "seed": null,
   "parameters": {
     "camera": "pull_out",
-    "duration_sec": 8.0,
+    "duration_sec": 10.0,
     "aspect": "horizontal",
     "zoom": 0.12,
     "fps": 24,
     "crop": "iw:iw*9/16:0:(ih-iw*9/16)*0.3"
   },
-  "created": "2026-11-25T23:50:36+00:00"
+  "created": "2026-11-26T09:57:25+00:00"
 }

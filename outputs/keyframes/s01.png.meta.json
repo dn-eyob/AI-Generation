@@ -1,5 +1,5 @@
 {
-  "input_hash": "8f12817f1cc50da5",
+  "input_hash": "0f4fd21fe8035231",
   "stage": "keyframes",
   "shot_id": "s01",
   "provider": "cloudflare",
@@ -8,5 +8,5 @@
   "parameters": {
     "steps": 8
   },
-  "created": "2026-11-25T23:26:19+00:00"
+  "created": "2026-11-26T09:51:23+00:00"
 }

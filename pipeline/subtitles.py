@@ -29,9 +29,12 @@ def shot_starts(sb: dict) -> dict[str, float]:
 
 def wrap(text: str, width: int = MAX_LINE_CHARS) -> str:
     lines = textwrap.wrap(text, width=width)
-    if len(lines) > 2:   # rebalance into two lines rather than three
-        half = len(text) // 2
-        split = text.rfind(" ", 0, half + 10)
+    if len(lines) > 2:
+        # Rebalance into two lines, splitting at the space nearest the middle so the
+        # longer line is as short as possible. (The first version split up to 10 chars
+        # past the middle; the player then re-wrapped that line into a third one.)
+        spaces = [i for i, ch in enumerate(text) if ch == " "]
+        split = min(spaces, key=lambda i: max(len(text[:i]), len(text[i + 1:])))
         lines = [text[:split].strip(), text[split:].strip()]
     return "\n".join(lines)
 

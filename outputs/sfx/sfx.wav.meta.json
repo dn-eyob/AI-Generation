@@ -1,18 +1,20 @@
 {
-  "input_hash": "c758c6d92a30ee22",
+  "input_hash": "70e454a3cc23b167",
   "stage": "sfx",
   "shot_id": null,
   "provider": "local",
-  "model": "numpy-sfx-synth-v1",
+  "model": "numpy-sfx-synth-v2",
   "seed": 9090,
   "parameters": {
     "effects": [
+      "chisel",
       "clink",
       "grind",
       "pour",
       "roast",
-      "wash"
+      "wash",
+      "wind"
     ]
   },
-  "created": "2026-11-26T02:05:59+00:00"
+  "created": "2026-11-26T10:00:55+00:00"
 }

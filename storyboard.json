@@ -2,10 +2,13 @@
   "title": "The King Who Built a Wonder in Stone",
   "title_native": "በድንጋይ ድንቅ የሠራው ንጉሥ",
   "slug": "wonder_in_stone",
-  "version": 8,
+  "version": 11,
   "logline": "A twelfth-century Ethiopian king dreams of a new Jerusalem, and generations of craftsmen carve it, church by church, out of the living rock of Lalibela.",
   "end_card_title": "ETHIOPIA – A WONDER CARVED IN STONE",
-  "language": {"narration": "am", "subtitles": "en"},
+  "language": {
+    "narration": "am",
+    "subtitles": "en"
+  },
   "style": {
     "style_block": "epic hand-painted illustration, warm golden light, rich ochre and terracotta reds of volcanic rock, deep highland greens, soft atmospheric haze, gentle film grain, cinematic and reverent",
     "object_glossary": {
@@ -36,91 +39,160 @@
     "instrumental": true,
     "seed": 5151,
     "cues": [
-      {"id": "m01", "from_shot": "s01", "to_shot": "s03", "intent": "Starts with a lone krar over a quiet drone: dawn, and a king's dream."},
-      {"id": "m02", "from_shot": "s04", "to_shot": "s06", "intent": "Builds as the carving grows and the churches are revealed."},
-      {"id": "m03", "from_shot": "s07", "to_shot": "s08", "intent": "Resolves into a warm, majestic close over the sunset."}
+      {
+        "id": "m01",
+        "from_shot": "s01",
+        "to_shot": "s03",
+        "intent": "Starts with a lone krar over a quiet drone: dawn, and a king's dream."
+      },
+      {
+        "id": "m02",
+        "from_shot": "s04",
+        "to_shot": "s06",
+        "intent": "Builds as the carving grows and the churches are revealed."
+      },
+      {
+        "id": "m03",
+        "from_shot": "s07",
+        "to_shot": "s08",
+        "intent": "Resolves into a warm, majestic close over the sunset."
+      }
     ]
   },
   "shots": [
     {
-      "id": "s01", "beat": 1,
+      "id": "s01",
+      "beat": 1,
       "reason": "Establishes the place and the age: dawn over the highlands, with the red rock of Lalibela waiting in the valley.",
-      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
+      "shot_size": "extreme_wide",
+      "duration_sec": 10.0,
+      "characters": [],
       "image_prompt": "Sunrise over the green Ethiopian highlands, layered mountains in soft haze, and in the valley below the reddish rock of Lalibela with a rock-hewn church glimpsed among the hills, centred composition.",
       "motion_prompt": "Morning mist drifts slowly as the camera pushes in.",
-      "camera": "push_in", "video_mode": "kenburns", "seed": 2001, "sfx": ["wind"],
+      "camera": "push_in",
+      "video_mode": "kenburns",
+      "seed": 2001,
+      "sfx": [
+        "wind"
+      ],
       "narration": "ከብዙ ዘመን በፊት፣ በኢትዮጵያ ደጋ፣ አንድ ንጉሥ ታላቅ ሕልም አለመ።",
       "subtitle": "Long ago, in the highlands of Ethiopia, a king dreamed a great dream."
     },
     {
-      "id": "s02", "beat": 1,
+      "id": "s02",
+      "beat": 1,
       "reason": "Introduces the king and his vision, a new Jerusalem in Ethiopia, the idea the whole film follows.",
-      "shot_size": "wide", "duration_sec": 10.0, "characters": ["king"],
+      "shot_size": "wide",
+      "duration_sec": 10.0,
+      "characters": [
+        "king"
+      ],
       "image_prompt": "The king stands on a mountain ridge at dawn, centred, gazing out over his kingdom of terraced hills, his advisers beside him seen only from behind as robed silhouettes.",
       "motion_prompt": "Robes stir in the wind as the camera pans slowly right.",
-      "camera": "pan_right", "video_mode": "kenburns", "seed": 2002,
+      "camera": "pan_right",
+      "video_mode": "kenburns",
+      "seed": 2002,
       "narration": "ስሙ ንጉሥ ላሊበላ ነበር። በኢትዮጵያ ምድር አዲስ ኢየሩሳሌምን ለመሥራት ተነሳ።",
       "subtitle": "His name was King Lalibela. He set out to build a new Jerusalem in Ethiopia."
     },
     {
-      "id": "s03", "beat": 2,
+      "id": "s03",
+      "beat": 2,
       "reason": "Shows the impossible challenge: not building with stones, but carving whole churches out of one rock.",
-      "shot_size": "wide", "duration_sec": 10.0, "characters": [],
+      "shot_size": "wide",
+      "duration_sec": 10.0,
+      "characters": [],
       "image_prompt": "Ethiopian stone workers in simple white cotton clothing gather around an enormous reddish volcanic rock outcrop, holding iron chisels, hammers and wooden mallets, centred, the workers seen mostly from behind and in profile.",
       "motion_prompt": "Dust drifts in the light as the camera tilts down slowly.",
-      "camera": "tilt_down", "video_mode": "kenburns", "seed": 2003, "sfx": ["chisel"],
+      "camera": "tilt_down",
+      "video_mode": "kenburns",
+      "seed": 2003,
+      "sfx": [
+        "chisel"
+      ],
       "narration": "አብያተ ክርስቲያናቱ በድንጋይ አይገነቡም፤ ከአንድ ዓለት ተፈልፍለው ይሠራሉ።",
       "subtitle": "The churches would not be built from stones, but carved from a single rock."
     },
     {
-      "id": "s04", "beat": 2,
+      "id": "s04",
+      "beat": 2,
       "reason": "Honours the craftsmen: the skill and patience of generations who turned a mountain into architecture.",
-      "shot_size": "medium", "duration_sec": 10.0, "characters": [],
-      "image_prompt": "Workers carving the walls, pillars, arched windows and a doorway of a rock-hewn church out of reddish rock, stone dust glowing in shafts of sunlight, faces turned to their work, centred.",
+      "shot_size": "medium",
+      "duration_sec": 10.0,
+      "characters": [],
+      "image_prompt": "Ethiopian workers with dark skin in white cotton clothing carving a church directly out of a reddish rock face, the half-finished walls still joined to the bedrock, Aksumite-style windows with square stone frames, a rough doorway being cut, stone dust glowing in shafts of sunlight, centred.",
       "motion_prompt": "Stone dust floats in the sunbeams as the camera pushes in.",
-      "camera": "push_in", "video_mode": "kenburns", "seed": 2004, "sfx": ["chisel"],
+      "camera": "push_in",
+      "video_mode": "kenburns",
+      "seed": 2004,
+      "sfx": [
+        "chisel"
+      ],
       "narration": "በታላቅ ጥበብና ትዕግሥት፣ ጠራቢዎች ተራራውን ወደ አስደናቂ ሕንጻ ለወጡት።",
       "subtitle": "With great skill and patience, carvers turned the mountain into wonders."
     },
     {
-      "id": "s05", "beat": 3,
+      "id": "s05",
+      "beat": 3,
       "reason": "The reveal: eleven churches standing in their trenches, the scale of the achievement seen from above.",
-      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
-      "image_prompt": "High aerial view of several rock-hewn churches standing in deep trenches cut into reddish rock, one large rock-hewn church surrounded by rows of carved stone columns, green hills around, centred.",
+      "shot_size": "extreme_wide",
+      "duration_sec": 10.0,
+      "characters": [],
+      "image_prompt": "High aerial view of reddish volcanic ground with several rock-hewn churches with flat roofs and no domes, sunk below ground level in deep rectangular trenches, their flat roofs level with the surrounding ground, connected by narrow carved passages, green hills around, centred.",
       "motion_prompt": "Soft clouds pass as the camera pulls out slowly.",
-      "camera": "pull_out", "video_mode": "kenburns", "seed": 2005,
+      "camera": "pull_out",
+      "video_mode": "kenburns",
+      "seed": 2005,
       "narration": "አሥራ አንድ ውቅር አብያተ ክርስቲያናት ተፈጠሩ፤ ከዓለም ድንቆች አንዱ።",
       "subtitle": "Eleven rock-hewn churches emerged, one of the wonders of the world."
     },
     {
-      "id": "s06", "beat": 3,
+      "id": "s06",
+      "beat": 3,
       "reason": "The most famous image of Lalibela: Bete Giyorgis, the cross carved down into the earth.",
-      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
-      "image_prompt": "Dramatic aerial view looking straight down on Bete Giyorgis, centred in the frame, warm afternoon light and long shadows.",
+      "shot_size": "extreme_wide",
+      "duration_sec": 10.0,
+      "characters": [],
+      "image_prompt": "Top-down aerial view of Bete Giyorgis: a cross-shaped building with four equal arms, like a giant plus sign, carved into red rock and sitting in a square pit, the cross-shaped roof filling the centre of the frame, warm afternoon light and long shadows.",
       "motion_prompt": "Light shifts across the rock as the camera pushes in slowly.",
-      "camera": "push_in", "video_mode": "kenburns", "seed": 2006,
+      "camera": "push_in",
+      "video_mode": "kenburns",
+      "seed": 2006,
       "narration": "ከነዚህም መካከል ቤተ ጊዮርጊስ፣ በመስቀል ቅርጽ ወደ ምድር ጥልቅ ተፈልፍሏል።",
       "subtitle": "Among them, Bete Giyorgis, carved deep into the earth in the shape of a cross."
     },
     {
-      "id": "s07", "beat": 4,
+      "id": "s07",
+      "beat": 4,
       "reason": "Shows the churches are alive, not ruins: priests and pilgrims still pray there today.",
-      "shot_size": "medium", "duration_sec": 10.0, "characters": [],
+      "shot_size": "medium",
+      "duration_sec": 10.0,
+      "characters": [],
       "image_prompt": "Ethiopian Orthodox priests in white robes and white turbans holding ornate hand crosses, and pilgrims wrapped in white netela shawls, praying beside a rock-hewn church, candles glowing, figures seen from behind and in soft profile, centred.",
       "motion_prompt": "Candle flames flicker as the camera pans slowly left.",
-      "camera": "pan_left", "video_mode": "kenburns", "seed": 2007,
+      "camera": "pan_left",
+      "video_mode": "kenburns",
+      "seed": 2007,
       "narration": "ዛሬም፣ ከዘመናት በኋላ፣ የጸሎት፣ የመንፈሳዊ ጉዞና የእምነት ስፍራ ናቸው።",
       "subtitle": "Centuries later, they remain places of prayer, pilgrimage and faith."
     },
     {
-      "id": "s08", "beat": 5,
+      "id": "s08",
+      "beat": 5,
       "reason": "Lands the message: Lalibela's legacy as Ethiopia's pride, closing on the cross at sunset.",
-      "shot_size": "wide", "duration_sec": 10.0, "characters": [],
-      "image_prompt": "Golden sunset over Lalibela, long shadows across the reddish rock, Bete Giyorgis glowing at the centre in its deep pit, highland mountains behind.",
+      "shot_size": "wide",
+      "duration_sec": 11.5,
+      "characters": [],
+      "image_prompt": "Top-down aerial view at golden sunset of Bete Giyorgis: a cross-shaped building with four equal arms, like a giant plus sign, carved into red rock and sitting in a square pit, the cross glowing in the last warm light, long dark shadows, centred.",
       "motion_prompt": "The camera moves slowly toward the church as the light fades.",
-      "camera": "push_in", "video_mode": "kenburns", "seed": 2008, "sfx": ["wind"],
+      "camera": "push_in",
+      "video_mode": "kenburns",
+      "seed": 2008,
+      "sfx": [
+        "wind"
+      ],
       "narration": "ላሊበላ ለዓለም ይመሰክራል፤ የኢትዮጵያ ሀብት ታሪኳ፣ እምነቷና ቅርሷ ነው።",
-      "subtitle": "Lalibela tells the world: Ethiopia's treasures are its history, faith and heritage."
+      "subtitle": "Lalibela shows the world Ethiopia's history, faith and heritage."
     }
   ]
 }

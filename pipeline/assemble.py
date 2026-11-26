@@ -57,11 +57,11 @@ END_CARD_TEXT = {
     "vertical": ("{\\an5}{\\fs14}Made with AI\\N\\N{\\fs9}"
                  "Images: FLUX.1 schnell\\NVoice: Gemini 3.8 Flash TTS\\N"
                  "Music: composed in code (Tizita)\\NEdit: FFmpeg\\N\\N"
-                 "Illustrated characters,\\Nnot real people"),
+                 "Illustrations are artistic impressions;\\Nfigures are imagined"),
     "horizontal": ("{\\an5}{\\fs24}Made with AI\\N\\N{\\fs13}"
                    "Images: FLUX.1 schnell  ·  Voice: Gemini 3.8 Flash TTS\\N"
                    "Music: composed in code (Tizita scale)  ·  Edit: FFmpeg\\N"
-                   "Illustrated characters, not real people"),
+                   "Illustrations are artistic impressions; figures are imagined"),
 }
 
 

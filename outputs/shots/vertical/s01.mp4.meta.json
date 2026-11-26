@@ -1,5 +1,5 @@
 {
-  "input_hash": "52b9cc85cd548e62",
+  "input_hash": "b2cf4ae4de74bd0b",
   "stage": "shots",
   "shot_id": "s01/vertical",
   "provider": "local",
@@ -7,11 +7,11 @@
   "seed": null,
   "parameters": {
     "camera": "push_in",
-    "duration_sec": 8.0,
+    "duration_sec": 10.0,
     "aspect": "vertical",
     "zoom": 0.12,
     "fps": 24,
     "crop": "ih*9/16:ih"
   },
-  "created": "2026-11-25T23:47:21+00:00"
+  "created": "2026-11-26T09:54:19+00:00"
 }

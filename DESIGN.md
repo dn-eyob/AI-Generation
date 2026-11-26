@@ -105,3 +105,8 @@ I chose to tell Lalibela's story, Ethiopia's rock-hewn churches, as the heritage
 | Date | Shot | Change | Because |
 |---|---|---|---|
 | 2026-11-26 | all | v8: new story, 8 shots × 10 s, 74 Amharic words, new style block, `object_glossary` for Bete Giyorgis and rock-hewn churches, sounds `wind` (s01, s08) and `chisel` (s03, s04), closing title card | Story change (above) |
+| 2026-11-26 | s08 | duration 10 → 11.5 s (film 83 → 84.5 s) | Measured narration: the closing line is 10.16 s, needing 10.96 s with breathing room. The other 7 shortened Amharic lines fit (7.2–8.6 s) |
+| 2026-11-26 | s04, s05, s06, s08 | v9/v10: image prompts rewritten with explicit geometry and camera angle | 4/8 first keyframes were architecturally wrong (European domes, a box instead of the cross-shaped Bete Giyorgis): E-11 |
+| 2026-11-26 | all | Amharic narration text and audio for all 8 lines reviewed and approved by me (native speaker) | Lines were translated and shortened by the pipeline author, so they needed a native check before release |
+| 2026-11-26 | s08 | v11: English subtitle shortened to "Lalibela shows the world Ethiopia's history, faith and heritage." (same meaning as the Amharic) | It could not fit 2 lines on the 9:16 frame (E-14) |
+| 2026-11-26 | end card | "Illustrated characters, not real people" → "Illustrations are artistic impressions; figures are imagined" | King Lalibela is a real historical person; the old line (true for the coffee film) was no longer accurate |

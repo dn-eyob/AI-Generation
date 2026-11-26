@@ -2,86 +2,70 @@
   "shots": [
     {
       "shot_id": "s01",
-      "planned_sec": 8.0,
-      "narration_sec": 6.14,
-      "needed_sec": 6.94,
+      "planned_sec": 10.0,
+      "narration_sec": 8.13,
+      "needed_sec": 8.93,
       "fits": true,
-      "words": 7
+      "words": 10
     },
     {
       "shot_id": "s02",
-      "planned_sec": 7.0,
-      "narration_sec": 5.4,
-      "needed_sec": 6.2,
+      "planned_sec": 10.0,
+      "narration_sec": 7.57,
+      "needed_sec": 8.37,
       "fits": true,
-      "words": 6
+      "words": 10
     },
     {
       "shot_id": "s03",
-      "planned_sec": 8.0,
-      "narration_sec": 4.88,
-      "needed_sec": 5.68,
-      "fits": true,
-      "words": 6
-    },
-    {
-      "shot_id": "s04",
-      "planned_sec": 7.0,
-      "narration_sec": 6.12,
-      "needed_sec": 6.92,
-      "fits": true,
-      "words": 6
-    },
-    {
-      "shot_id": "s05",
-      "planned_sec": 8.0,
-      "narration_sec": 6.38,
-      "needed_sec": 7.18,
-      "fits": true,
-      "words": 6
-    },
-    {
-      "shot_id": "s06",
-      "planned_sec": 8.0,
-      "narration_sec": 5.96,
-      "needed_sec": 6.76,
-      "fits": true,
-      "words": 7
-    },
-    {
-      "shot_id": "s07",
-      "planned_sec": 7.0,
-      "narration_sec": 6.06,
-      "needed_sec": 6.86,
-      "fits": true,
-      "words": 7
-    },
-    {
-      "shot_id": "s08",
-      "planned_sec": 7.0,
-      "narration_sec": 5.87,
-      "needed_sec": 6.67,
+      "planned_sec": 10.0,
+      "narration_sec": 7.99,
+      "needed_sec": 8.79,
       "fits": true,
       "words": 8
     },
     {
-      "shot_id": "s09",
-      "planned_sec": 8.0,
-      "narration_sec": 7.16,
-      "needed_sec": 7.96,
+      "shot_id": "s04",
+      "planned_sec": 10.0,
+      "narration_sec": 7.98,
+      "needed_sec": 8.78,
       "fits": true,
-      "words": 6
+      "words": 9
     },
     {
-      "shot_id": "s10",
-      "planned_sec": 12.0,
-      "narration_sec": 6.89,
-      "needed_sec": 7.69,
+      "shot_id": "s05",
+      "planned_sec": 10.0,
+      "narration_sec": 8.18,
+      "needed_sec": 8.98,
+      "fits": true,
+      "words": 9
+    },
+    {
+      "shot_id": "s06",
+      "planned_sec": 10.0,
+      "narration_sec": 7.22,
+      "needed_sec": 8.02,
+      "fits": true,
+      "words": 10
+    },
+    {
+      "shot_id": "s07",
+      "planned_sec": 10.0,
+      "narration_sec": 8.58,
+      "needed_sec": 9.38,
+      "fits": true,
+      "words": 9
+    },
+    {
+      "shot_id": "s08",
+      "planned_sec": 11.5,
+      "narration_sec": 10.16,
+      "needed_sec": 10.96,
       "fits": true,
       "words": 9
     }
   ],
-  "narration_total_sec": 60.86,
-  "planned_total_sec": 80.0,
-  "narration_share": 0.76
+  "narration_total_sec": 65.81,
+  "planned_total_sec": 81.5,
+  "narration_share": 0.81
 }

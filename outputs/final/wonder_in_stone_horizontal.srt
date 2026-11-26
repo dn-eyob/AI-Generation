@@ -1,0 +1,43 @@
+1
+00:00:00,300 --> 00:00:08,630
+Long ago, in the highlands of Ethiopia, a
+king dreamed a great dream.
+
+2
+00:00:10,300 --> 00:00:18,070
+His name was King Lalibela. He set out to
+build a new Jerusalem in Ethiopia.
+
+3
+00:00:20,300 --> 00:00:28,490
+The churches would not be built from
+stones, but carved from a single rock.
+
+4
+00:00:30,300 --> 00:00:38,480
+With great skill and patience, carvers
+turned the mountain into wonders.
+
+5
+00:00:40,300 --> 00:00:48,680
+Eleven rock-hewn churches emerged, one of
+the wonders of the world.
+
+6
+00:00:50,300 --> 00:00:57,720
+Among them, Bete Giyorgis, carved deep
+into the earth in the shape of a cross.
+
+7
+00:01:00,300 --> 00:01:09,080
+Centuries later, they remain places of
+prayer, pilgrimage and faith.
+
+8
+00:01:10,300 --> 00:01:20,660
+Lalibela shows the world Ethiopia's
+history, faith and heritage.
+
+9
+00:01:21,700 --> 00:01:24,400
+{\an5}{\fs22}{\b1}ETHIOPIA – A WONDER CARVED IN STONE{\b0}\N\N{\fs24}Made with AI\N\N{\fs13}Images: FLUX.1 schnell  ·  Voice: Gemini 3.8 Flash TTS\NMusic: composed in code (Tizita scale)  ·  Edit: FFmpeg\NIllustrations are artistic impressions; figures are imagined

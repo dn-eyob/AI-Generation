@@ -1,17 +1,17 @@
 {
-  "input_hash": "ea52a7b8b3edeff4",
+  "input_hash": "d5a0f1c3cca538fd",
   "stage": "shots",
   "shot_id": "s04/horizontal",
   "provider": "local",
   "model": "ffmpeg-kenburns",
   "seed": null,
   "parameters": {
-    "camera": "static",
-    "duration_sec": 7.0,
+    "camera": "push_in",
+    "duration_sec": 10.0,
     "aspect": "horizontal",
     "zoom": 0.12,
     "fps": 24,
     "crop": "iw:iw*9/16:0:(ih-iw*9/16)*0.3"
   },
-  "created": "2026-11-25T23:49:37+00:00"
+  "created": "2026-11-26T09:56:47+00:00"
 }

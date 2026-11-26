@@ -45,7 +45,7 @@ CANDIDATES = {
     "A": {"scale": "tizita_minor", "bpm": 66, "density": (0.22, 0.40, 0.30), "drone": 0.55,
           "desc": "Tizita minor, 66 bpm, sparse and intimate"},
     "B": {"scale": "tizita_major", "bpm": 72, "density": (0.25, 0.45, 0.35), "drone": 0.45,
-          "desc": "Tizita major, 72 bpm (storyboard tempo), warmer and brighter"},
+          "desc": "Tizita major, 72 bpm, warmer and brighter"},
     "C": {"scale": "tizita_minor", "bpm": 80, "density": (0.30, 0.55, 0.40), "drone": 0.70,
           "desc": "Tizita minor, 80 bpm, fuller drone and busier krar"},
 }

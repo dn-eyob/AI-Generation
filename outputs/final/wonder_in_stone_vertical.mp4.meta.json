@@ -1,5 +1,5 @@
 {
-  "input_hash": "5188c2373005d45a",
+  "input_hash": "4cc666f20b0b749b",
   "stage": "assemble_video",
   "shot_id": "vertical",
   "provider": "local",
@@ -17,5 +17,5 @@
     "fps": 24,
     "crf": 20
   },
-  "created": "2026-11-25T23:56:27+00:00"
+  "created": "2026-11-26T10:13:25+00:00"
 }
