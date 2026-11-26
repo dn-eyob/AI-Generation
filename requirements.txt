@@ -3,3 +3,4 @@ google-genai==3.6.1
 jsonschema==4.26.0
 python-dotenv==1.2.4
 requests==2.34.2
+numpy==2.5.5

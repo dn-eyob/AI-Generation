@@ -57,4 +57,13 @@ What broke, what I tried, and what fixed it (or how I worked around it).
   - Re-rolled frames with text: the large text went away; small corner marks remain but fall **outside the centre crops** for 9:16 and 16:9.
 - **Not solved:** wardrobe drift in s06 (pink shawl). Accepted: it reads as the same scene, and another re-roll risks losing a good pour.
 - **Evidence:** `runs.jsonl` stage `reference` and `keyframes`; `EXPERIMENTS.md` E-05 to E-07.
+
+### F-06 — ACE-Step 1.5 on Kaggle failed; no score came back
+- **Date / stage:** 2026-11-26, music (`kaggle/music_acestep.py` on Kaggle, GPU T4)
+- **Symptom:** the generation cell ended in an error, so `music_results.zip` was never written; three download attempts found nothing on my machine (searched Downloads and all of `C:\Users`).
+- **Cause:** **not determined.** I did not capture the error text before closing the session, so the exact failing call is unknown. Known risk factors from the docs (checked 2026-11-26): ACE-Step 1.5 targets Python 3.11–3.12 and installs with `uv`, while my script used `pip install -e`; the T4 (16 GB) sits on the boundary of the documented 12–16 GB GPU tier; the low-VRAM init flags I passed were unverified. *Lesson: copy the traceback before anything else.*
+- **What I did instead:** wrote `pipeline/music.py`, which composes an original instrumental score **in code** (numpy): a krar-like plucked melody in the **Tizita** pentatonic mode over an E drone, shaped by the storyboard's three music cues, with 3 candidates (A/B/C) and previews ducked under the real narration. Deterministic: rebuilding candidate A gives a byte-identical file (`deeab9ffba411176`). Each candidate takes 30–42 s on CPU, with no GPU and no quota.
+- **Trade-off:** the score is not AI-generated, so the open-weights music model is untested in this project. The end card credit was changed to say so honestly.
+- **Still open:** re-run ACE-Step with the error captured, then compare it against the code-composed score in a blind test (candidate ceiling experiment).
+- **Evidence:** `runs.jsonl` stage `music` (3 `ok` lines, provider `local`, model `numpy-tizita-synth-v1`).
 - **Evidence:** `runs.jsonl` stage `narration` (s02 `ok` at 22:57:15 UTC, then a gap, then the re-run); process stopped manually.

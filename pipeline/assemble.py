@@ -54,11 +54,11 @@ COMMON_STYLE = ("PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BackColour=&H
 END_CARD_TEXT = {
     "vertical": ("{\\an5}{\\fs14}Made with AI\\N\\N{\\fs9}"
                  "Images: FLUX.1 schnell\\NVoice: Gemini 3.8 Flash TTS\\N"
-                 "Music: ACE-Step 1.5\\NEdit: FFmpeg\\N\\N"
+                 "Music: composed in code (Tizita)\\NEdit: FFmpeg\\N\\N"
                  "Illustrated characters,\\Nnot real people"),
     "horizontal": ("{\\an5}{\\fs24}Made with AI\\N\\N{\\fs13}"
                    "Images: FLUX.1 schnell  ·  Voice: Gemini 3.8 Flash TTS\\N"
-                   "Music: ACE-Step 1.5  ·  Edit: FFmpeg\\N"
+                   "Music: composed in code (Tizita scale)  ·  Edit: FFmpeg\\N"
                    "Illustrated characters, not real people"),
 }
 

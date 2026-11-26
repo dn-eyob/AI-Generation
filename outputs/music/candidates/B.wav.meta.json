@@ -1,0 +1,20 @@
+{
+  "input_hash": "854b580215fe9cfa",
+  "stage": "music",
+  "shot_id": "B",
+  "provider": "local",
+  "model": "numpy-tizita-synth-v1",
+  "seed": 4243,
+  "parameters": {
+    "scale": "tizita_major",
+    "bpm": 72,
+    "density": [
+      0.25,
+      0.45,
+      0.35
+    ],
+    "drone": 0.45,
+    "version": "tizita-synth-v1"
+  },
+  "created": "2026-11-26T01:17:44+00:00"
+}
