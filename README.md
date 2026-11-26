@@ -8,7 +8,8 @@ The film is generated from one file, [`storyboard.json`](storyboard.json), by a 
 |---|---|
 | 🎬 Film (9:16, main) | https://youtube.com/shorts/8m-pmgWALgE (verified playing signed-out, 2026-11-26) |
 | 🎬 Film (16:9) | https://youtu.be/MtDooMUs4Bs (verified public via YouTube oEmbed, 2026-11-26) |
-| 🎥 Walkthrough (≤ 5 min) | TODO: public link |
+| 🎥 Walkthrough (≤ 5 min) | https://youtu.be/h_rw17cinuY (includes a live single-shot regeneration of s07) |
+| 📣 Public post | https://lnkd.in/p/e7d-yhsE |
 | Local files | `outputs/final/wonder_in_stone_vertical.mp4`, `outputs/final/wonder_in_stone_horizontal.mp4` |
 
 > **Development history:** the pipeline was built and first user-tested on an earlier development storyboard (v1–v7). That work is kept as evidence in [DESIGN.md](DESIGN.md) §1–5, [EXPERIMENTS.md](EXPERIMENTS.md) and [FAILURES.md](FAILURES.md); the film is storyboard v8+ ([DESIGN.md §6](DESIGN.md)).
