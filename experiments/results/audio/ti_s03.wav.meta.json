@@ -1,0 +1,14 @@
+{
+  "input_hash": "8414ac12f60bd9c9",
+  "stage": "ceiling_tts",
+  "shot_id": "ti_s03",
+  "provider": "google",
+  "model": "gemini-3.8-flash-tts",
+  "seed": null,
+  "parameters": {
+    "voice": "Kore",
+    "style": "warm, calm, unhurried, like an elder telling a family story",
+    "lang": "ti"
+  },
+  "created": "2026-11-26T02:28:30+00:00"
+}

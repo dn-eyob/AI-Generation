@@ -119,6 +119,15 @@ def transcribe(lang: str, sid: str, wav: Path) -> dict:
 
 
 # ------------------------------------------------------------------ scoring
+# The transcriber sometimes answers with ISO 639-2/3 codes (e.g. "amh" for Amharic);
+# map them to the 639-1 codes used here so language-ID isn't marked wrong for formatting.
+ISO_ALIASES = {"amh": "am", "tir": "ti", "orm": "om", "gaz": "om", "hae": "om", "som": "so"}
+
+
+def lang_code(code: str | None) -> str | None:
+    c = (code or "").strip().lower().split("-")[0]
+    return ISO_ALIASES.get(c, c) or None
+
 def normalise(s: str) -> str:
     s = unicodedata.normalize("NFC", s).lower()
     s = re.sub(r"[፡-፨]", " ", s)          # Ethiopic punctuation (፡ ። ፣ ፤ ...)
@@ -151,7 +160,8 @@ def run() -> None:
             secs = gemini.wav_seconds(wav.read_bytes())
             rows.append({
                 "lang": lang, "shot": sid, "text": text, "transcript": heard.get("transcript", ""),
-                "heard_lang": heard.get("language_code"), "lang_id_ok": heard.get("language_code") == lang,
+                "heard_lang": heard.get("language_code"),
+                "lang_id_ok": lang_code(heard.get("language_code")) == lang,
                 "cer": cer(text, heard.get("transcript", "")), "audio_sec": secs,
                 "asr_model": heard.get("_asr_model"),
                 "chars_per_sec": round(len(normalise(text)) / secs, 1) if secs else None,
