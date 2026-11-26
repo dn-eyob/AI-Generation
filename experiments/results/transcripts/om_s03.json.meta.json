@@ -1,0 +1,12 @@
+{
+  "input_hash": "efdd21ac5df342a2",
+  "stage": "ceiling_asr",
+  "shot_id": "om_s03",
+  "provider": "google",
+  "model": "gemini-3.5-flash-lite",
+  "seed": null,
+  "parameters": {
+    "temperature": 0.0
+  },
+  "created": "2026-11-26T13:34:29+00:00"
+}

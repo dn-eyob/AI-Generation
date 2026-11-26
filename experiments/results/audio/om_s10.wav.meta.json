@@ -1,0 +1,14 @@
+{
+  "input_hash": "dfe9617b83b4a9db",
+  "stage": "ceiling_tts",
+  "shot_id": "om_s10",
+  "provider": "google",
+  "model": "gemini-3.8-flash-tts",
+  "seed": null,
+  "parameters": {
+    "voice": "Kore",
+    "style": "warm, calm, unhurried, like an elder telling a family story",
+    "lang": "om"
+  },
+  "created": "2026-11-26T13:41:29+00:00"
+}

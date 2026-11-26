@@ -25,33 +25,33 @@ FLUX.1 schnell $0.0000528 per 512×512 tile + $0.0001056 per step; FLUX.2 klein 
 ## Free-tier limits actually observed
 | Provider | Limit observed | Date checked |
 |---|---|---|
-| Google AI Studio | Free tier for Gemini 3.8 Flash, 3.5 Flash-Lite and 3.8 Flash TTS ("Free of charge" on the pricing page). The practical limit was **503 "high demand"** overloads at peak times; then, during the Phase 4 experiment (~20 text calls with audio input in a short window), **429 RESOURCE_EXHAUSTED: "You exceeded your current quota"** on several Flash models, which stopped the experiment at 5/12 clips (E-12, F-08). TTS kept working throughout | 2026-11-26 |
+| Google AI Studio | Free tier for Gemini 3.8 Flash, 3.5 Flash-Lite and 3.8 Flash TTS ("Free of charge" on the pricing page). The practical limit was **503 "high demand"** overloads at peak times; then, during the Phase 4 experiment (~20 text calls with audio input in a short window), **429 RESOURCE_EXHAUSTED: "You exceeded your current quota"** on several Flash models, which stopped the first run at 5/12 clips; a later retry reached 9/12 (E-12, F-08). TTS kept working throughout | 2026-11-26 |
 | Cloudflare Workers AI | **10,000 neurons/day** free (pricing page). FLUX.1 schnell 1024×1024 at 8 steps = 4×4.8 + 8×9.6 = **96 neurons/image → about 104 images/day**. This project used 19 schnell images + 3 klein images in total | 2026-11-26 |
 | Kaggle | 30 GPU hours/week (shown in notebook session options, GPU T4 ×2) | 2026-11-25 |
 
 ## Per-stage measurements
 <!-- BEGIN GENERATED: python -m pipeline.costs -->
-Generated from `runs.jsonl` (449 log lines). Latency = wall-clock seconds spent in calls (successful + failed attempts). Cached re-uses cost nothing and take ~0 s.
+Generated from `runs.jsonl` (517 log lines). Latency = wall-clock seconds spent in calls (successful + failed attempts). Cached re-uses cost nothing and take ~0 s.
 
 | Stage | Model(s) | OK | Cached | Retry | Error | Latency (s) | GPU min | List-price equiv. (USD) | Basis |
 |---|---|---|---|---|---|---|---|---|---|
 | smoke_test | @cf/black-forest-labs/flux-1-schnell, @cf/black-forest-labs/flux-2-klein-4b, gemini-3.5-flash, gemini-3.8-flash, gemini-3.8-flash-tts | 5 | 0 | 2 | 2 | 41.4 | 0.0 | 0.0028 (+1 unpriced) | 1 output tiles; 4 tiles + 4 steps; audio seconds x 25 tok/s; price not listed |
 | script | gemini-3.8-flash | 1 | 5 | 1 | 0 | 350.5 | 0.0 | 0.0097 | exact tokens |
-| narration | gemini-3.8-flash-tts | 19 | 77 | 0 | 0 | 233.2 | 0.0 | 0.0300 | audio seconds x 25 tok/s |
+| narration | gemini-3.8-flash-tts | 19 | 80 | 0 | 0 | 233.2 | 0.0 | 0.0300 | audio seconds x 25 tok/s |
 | radio_cut | ffmpeg | 2 | 1 | 0 | 0 | 69.9 | 0.0 | 0.0000 | local |
 | reference | @cf/black-forest-labs/flux-1-schnell, @cf/black-forest-labs/flux-2-klein-4b | 4 | 0 | 0 | 0 | 34.3 | 0.0 | 0.0044 | 4 output tiles; 4 tiles + 8 steps |
-| keyframes | @cf/black-forest-labs/flux-1-schnell | 29 | 57 | 0 | 0 | 142.7 | 0.0 | 0.0306 | 4 tiles + 8 steps |
-| shots | ffmpeg-kenburns | 56 | 92 | 0 | 0 | 1126.9 | 0.0 | 0.0000 | local |
-| assemble_audio | ffmpeg | 6 | 2 | 0 | 0 | 190.9 | 0.0 | 0.0000 | local |
-| assemble_video | ffmpeg | 14 | 2 | 0 | 0 | 2319.8 | 0.0 | 0.0000 | local |
-| assemble_check | ffmpeg-ebur128 | 8 | 0 | 0 | 0 | 0.0 | 0.0 | 0.0000 | local |
-| music | numpy-tizita-synth-v1 | 6 | 15 | 0 | 0 | 144.9 | 0.0 | 0.0000 | local |
+| keyframes | @cf/black-forest-labs/flux-1-schnell | 32 | 57 | 0 | 0 | 162.6 | 0.0 | 0.0338 | 4 tiles + 8 steps |
+| shots | ffmpeg-kenburns | 62 | 92 | 0 | 0 | 1235.0 | 0.0 | 0.0000 | local |
+| assemble_audio | ffmpeg | 6 | 5 | 0 | 0 | 190.9 | 0.0 | 0.0000 | local |
+| assemble_video | ffmpeg | 20 | 2 | 0 | 0 | 3104.7 | 0.0 | 0.0000 | local |
+| assemble_check | ffmpeg-ebur128 | 11 | 0 | 0 | 0 | 0.0 | 0.0 | 0.0000 | local |
+| music | numpy-tizita-synth-v1 | 6 | 24 | 0 | 0 | 144.9 | 0.0 | 0.0000 | local |
 | music_choice | numpy-tizita-synth-v1 | 2 | 0 | 0 | 0 | 0.0 | 0.0 | 0.0000 | local |
-| sfx | numpy-sfx-synth-v1, numpy-sfx-synth-v2 | 2 | 3 | 0 | 0 | 2.7 | 0.0 | 0.0000 | local |
+| sfx | numpy-sfx-synth-v1, numpy-sfx-synth-v2 | 2 | 6 | 0 | 0 | 2.7 | 0.0 | 0.0000 | local |
 | ceiling_translate | gemini-3.8-flash | 1 | 1 | 1 | 0 | 32.4 | 0.0 | 0.0013 | exact tokens |
-| ceiling_asr | gemini-3.5-flash, gemini-3.6-flash, gemini-3.7-flash, gemini-3.8-flash | 5 | 1 | 13 | 12 | 612.0 | 0.0 | 0.0000 (+5 unpriced) | price not listed |
-| ceiling_tts | gemini-3.8-flash-tts | 2 | 0 | 0 | 0 | 14.2 | 0.0 | 0.0025 | audio seconds x 25 tok/s |
-| **Total** | | **162** | **256** | **17** | **14** | **5315.8** | **0.0** | **0.0813** (+6 unpriced) | |
+| ceiling_asr | gemini-3.5-flash, gemini-3.5-flash-lite, gemini-3.6-flash, gemini-3.7-flash, gemini-3.8-flash | 9 | 1 | 25 | 24 | 1467.5 | 0.0 | 0.0000 (+9 unpriced) | price not listed |
+| ceiling_tts | gemini-3.8-flash-tts | 6 | 0 | 0 | 0 | 38952.2 | 0.0 | 0.0081 | audio seconds x 25 tok/s |
+| **Total** | | **188** | **274** | **29** | **26** | **46022.0** | **0.0** | **0.0901** (+10 unpriced) | |
 
 **Actually paid: $0.00** (free tiers only).
 <!-- END GENERATED -->

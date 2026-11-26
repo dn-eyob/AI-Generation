@@ -9,17 +9,17 @@
     },
     "ti": {
       "language": "Tigrinya",
-      "clips": 2,
-      "mean_cer": 0.275,
-      "lang_id_correct": "2/2",
+      "clips": 3,
+      "mean_cer": 0.356,
+      "lang_id_correct": "2/3",
       "mean_chars_per_sec": 5.8
     },
     "om": {
       "language": "Afaan Oromo",
-      "mean_cer": null,
-      "lang_id_correct": "0/0",
-      "mean_chars_per_sec": null,
-      "clips": 0
+      "clips": 3,
+      "mean_cer": 0.227,
+      "lang_id_correct": "3/3",
+      "mean_chars_per_sec": 9.2
     },
     "so": {
       "language": "Somali",
@@ -89,14 +89,58 @@
       "audio_sec": 6.48,
       "asr_model": "gemini-3.6-flash",
       "chars_per_sec": 6.0
+    },
+    {
+      "lang": "ti",
+      "shot": "s10",
+      "text": "ኣብ ዓለም ኣብ ዝሃለና ሃሊና፡ ጨና ገዛና እዚ እዩ።",
+      "transcript": "ዓለም አብዛልናም አለና ጭናገዛና እዚህ ነው።",
+      "heard_lang": "am",
+      "lang_id_ok": false,
+      "cer": 0.516,
+      "audio_sec": 5.51,
+      "asr_model": "gemini-3.6-flash",
+      "chars_per_sec": 5.6
+    },
+    {
+      "lang": "om",
+      "shot": "s03",
+      "text": "Aarri bunaa yeroo ol ka'u, nu waamuuf jechi hin barbaachisu.",
+      "transcript": "Arrabunna yero olka'uu nuwamu jechiin barbaceesu",
+      "heard_lang": "om",
+      "lang_id_ok": true,
+      "cer": 0.276,
+      "audio_sec": 5.64,
+      "asr_model": "gemini-3.5-flash-lite",
+      "chars_per_sec": 10.3
+    },
+    {
+      "lang": "om",
+      "shot": "s07",
+      "text": "Tonaa wajjin, dhumdi yaadannoo suuta gara harka ijoolleetti darba.",
+      "transcript": "Tana wajjiin dumbeeyyaddanoo suuta gara harka ijooleti darbaa.",
+      "heard_lang": "om",
+      "lang_id_ok": true,
+      "cer": 0.219,
+      "audio_sec": 6.87,
+      "asr_model": "gemini-3.5-flash-lite",
+      "chars_per_sec": 9.3
+    },
+    {
+      "lang": "om",
+      "shot": "s10",
+      "text": "Addunyaarra eessayyuu yoo jiraanne, urgaan manaa kanuma.",
+      "transcript": "Addunyaarra isayyo jiraanne urgaa maanaa kanuma",
+      "heard_lang": "om",
+      "lang_id_ok": true,
+      "cer": 0.185,
+      "audio_sec": 6.83,
+      "asr_model": "gemini-3.6-flash",
+      "chars_per_sec": 7.9
     }
   ],
   "partial": true,
   "missing": [
-    "ti_s10",
-    "om_s03",
-    "om_s07",
-    "om_s10",
     "so_s03",
     "so_s07",
     "so_s10"
