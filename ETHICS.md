@@ -18,6 +18,15 @@ Every real person whose story, face, likeness or voice is used is listed here **
 3. No voice cloning: the narrator is a Gemini prebuilt voice.
 4. If any real person's face, likeness or voice is added later, generation stops until their recorded, informed consent is added to this table first.
 
+### Story v8 (Lalibela), added 2026-11-26 before any v8 generation
+| Person / group | What appears | Consent required? | How handled |
+|---|---|---|---|
+| King Lalibela (12th–13th century) | An **imagined, generic** illustrated king | No living person, and no surviving likeness exists | Drawn as an invented figure (white and gold robe, simple crown); the storyboard description says "an imagined figure". Not presented as a portrait. |
+| Priests and pilgrims | Generic figures in white, seen from behind or in soft profile | No: no real or identifiable person is depicted | Prompts ask for figures from behind or in profile; no photos used as references. |
+| Bete Giyorgis and the Lalibela churches | AI illustrations of a real UNESCO World Heritage site and living place of worship | n/a | Shown with reverence (prayer, light, scale), never as spectacle. The images are **artistic impressions**, not accurate documentation; the physical form of Bete Giyorgis is described in the storyboard to stay close to reality. |
+
+Narration is still the synthetic Gemini prebuilt voice; no voice is cloned.
+
 ## 2. Licences
 | Component | Model / tool | Licence / terms | Output use |
 |---|---|---|---|

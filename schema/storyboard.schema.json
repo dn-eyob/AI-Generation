@@ -9,6 +9,8 @@
   "properties": {
     "title": { "type": "string", "minLength": 1, "description": "Film title (English)." },
     "title_native": { "type": "string", "description": "Film title in the narration language." },
+    "slug": { "type": "string", "pattern": "^[a-z0-9_]+$", "description": "File-name stem for the exports, e.g. 'wonder_in_stone' -> outputs/final/wonder_in_stone_vertical.mp4." },
+    "end_card_title": { "type": "string", "maxLength": 60, "description": "Closing line shown large on the end card, above the AI disclosure." },
     "version": { "type": "integer", "minimum": 1, "description": "Bumped on every storyboard revision (logged in DESIGN.md)." },
     "logline": { "type": "string" },
 
@@ -128,8 +130,8 @@
           "video_mode": { "type": "string", "enum": ["kenburns", "wan"], "default": "kenburns" },
           "sfx": {
             "type": "array",
-            "items": { "type": "string", "enum": ["wash", "roast", "grind", "pour", "clink"] },
-            "description": "Quiet ceremony sound effects synthesised by pipeline/sfx.py and mixed under the narration (User Test #1, P2)."
+            "items": { "type": "string", "enum": ["wash", "roast", "grind", "pour", "clink", "chisel", "wind"] },
+            "description": "Quiet sound effects synthesised by pipeline/sfx.py and mixed under the narration (added after User Test #1, P2)."
           },
           "seed": { "type": "integer", "minimum": 0 },
           "narration": { "type": "string", "description": "Spoken line in the narration language. May be empty for a music-only shot." },

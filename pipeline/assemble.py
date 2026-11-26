@@ -154,10 +154,20 @@ def measure_loudness(path: Path) -> dict:
 
 
 # ------------------------------------------------------------------ picture
+def end_card_text(sb: dict, aspect: str) -> str:
+    """Optional closing title (storyboard `end_card_title`) above the AI disclosure."""
+    title = sb.get("end_card_title", "").strip()
+    if not title:
+        return END_CARD_TEXT[aspect]
+    size = 13 if aspect == "vertical" else 22
+    body = END_CARD_TEXT[aspect].replace("{\\an5}", "", 1)
+    return f"{{\\an5}}{{\\fs{size}}}{{\\b1}}{title}{{\\b0}}\\N\\N{body}"
+
+
 def write_srt_with_end_card(sb: dict, aspect: str, path: Path) -> None:
     items = subtitles.cues(sb, width=SUB_STYLE[aspect]["wrap"])
     total = total_seconds(sb)
-    items.append((total - END_CARD_SEC + 0.2, total - 0.1, END_CARD_TEXT[aspect]))
+    items.append((total - END_CARD_SEC + 0.2, total - 0.1, end_card_text(sb, aspect)))
     subtitles.write_srt(path, items)
 
 
@@ -185,7 +195,8 @@ def build_video(sb: dict, aspect: str, audio: Path, srt: Path, out: Path) -> dic
 def run(force: bool = False) -> list[Path]:
     sb = storyboard.load()
     have_score = SCORE.exists()
-    name = "three_rounds" if have_score else "rough_cut"
+    slug = sb.get("slug", "film")
+    name = slug if have_score else f"{slug}_rough_cut"
     music_input = (["-i", str(SCORE)] if have_score
                    else ["-f", "lavfi", "-i", f"aevalsrc='{DRONE}':s=48000:d={total_seconds(sb)}"])
     music_id = file_hash(SCORE) if have_score else "placeholder-drone"

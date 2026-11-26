@@ -2,6 +2,8 @@
 
 Audience and intent are written here **before** anything is generated (first committed 2026-11-26, before any keyframe, clip or music generation).
 
+> **Story change (storyboard v8, 2026-11-26):** the film changed from *Three Rounds* (my family's coffee ceremony, sections 1–5 below) to *The King Who Built a Wonder in Stone* (Lalibela). The new brief and the honest consequences are in **section 6**, written and committed before any v8 asset was generated. Sections 1–5 are kept unchanged as the record of the first film; its storyboard and final exports are archived in `archive/three_rounds/`.
+
 ## 1. Brief
 - **Working title:** *Three Rounds* (ሶስት ዙር)
 - **Story:** my family's traditional Ethiopian coffee ceremony. In my family coffee is more than a drink: when we come together we roast, brew and share coffee, tell stories and laugh. It reminds us of our culture, of love, and of the importance of family.
@@ -70,3 +72,36 @@ See the revision log below. In short: merged the two opening shots, added a wash
 | 2026-11-26 | s02, s03, s05, s06, s07, s10 | v7: **ceremony sound effects added**, declared per shot in the new `sfx` field: wash (s02), roast crackle (s03), pestle thuds (s05), pour (s06), cup clinks (s07, s10). Synthesised in code (`pipeline/sfx.py`, no recordings or licences), mixed into the music bed so they duck under the narration | User Test #1, P2: "add the familiar sounds of the ceremony, such as coffee beans roasting, coffee being poured, and cups touching" |
 | 2026-11-26 | s02, s05 | v3 timing fix: s02 6 → 7 s, s05 7 → 8 s | Measured new narration: s02 5.40 s and s05 6.38 s, which need 6.20 s and 7.18 s with breathing room |
 | 2026-11-26 | all | v3 total: 10 shots, 80 s + 3 s end card = **83 s**; 68 narration words (60.9 s spoken, 76% of the film); radio cut rebuilt | |
+
+## 6. Story change: *The King Who Built a Wonder in Stone* (v8)
+
+**Decided:** 2026-11-26, by me, late in the project. **Written and committed before any v8 narration, image, score or edit was generated.**
+
+### Why I changed the story
+I chose to tell Lalibela's story, Ethiopia's rock-hewn churches, as the heritage I most want young Ethiopians and the diaspora to feel proud of. It is national rather than family heritage.
+
+### Brief (v8)
+- **Logline:** *A twelfth-century Ethiopian king dreams of a new Jerusalem, and generations of craftsmen carve it, church by church, out of the living rock of Lalibela.*
+- **Audience:** young Ethiopians, Ethiopians abroad, and people curious about Ethiopian history and faith.
+- **Where they watch:** on a phone, in a social feed (9:16 first), often with the sound low, so subtitles carry the story.
+- **Intent (what they feel at the end):** **pride and awe.** Pride that this was made in Ethiopia; awe at what people carved by hand.
+- **How might we…** help young Ethiopians and the diaspora feel the scale and devotion behind Lalibela in 80 seconds, so they leave proud of a wonder that is theirs?
+- **Structure (5 beats, 8 shots):** 1 vision (s01–s02) → 2 the impossible challenge and the carving (s03–s04) → 3 the reveal: eleven churches, Bete Giyorgis (s05–s06) → 4 a living faith (s07) → 5 the legacy (s08). Closing card: "ETHIOPIA – A WONDER CARVED IN STONE".
+- **Source script:** my 8-scene script (narration in English). Adapted for the pipeline:
+  1. every scene is 10 s (80 s + 3 s end card = 83 s);
+  2. narration translated into **Amharic** and **shortened to ~9–10 words per line**, because Amharic TTS speaks at ≈1.13 words/s (E-03); the original English lines would not fit 10-second scenes;
+  3. English subtitles are translations of the Amharic lines, so the voice and the text match.
+
+### What carries over, and what doesn't
+- **Carries over:** the whole pipeline, style approach, caching, logging, every experiment and failure (E-01 to E-10, F-01 to F-08) and their lessons: object glossary for culturally specific things (E-06, now Bete Giyorgis), shot-level specificity (E-07), per-aspect crops and subtitles (E-08), measured narration timing (E-03), effects beside the voice (E-10).
+- **Does not carry over (honest cost):** User Test #1 tested the *coffee-ceremony* radio cut. Its findings (shorter opening, show the process, give the ending room, use real sounds, show the objects) informed how I structured v8, but **the new story itself has not been tested with its audience**. Section 4's note on User Test #2 applies doubly.
+
+### Risks I'm watching
+- **Accuracy:** Bete Giyorgis is a specific, famous building. Image models draw generic churches, so its physical form is fixed in the storyboard's `object_glossary`, and each keyframe is checked against it. Images are artistic impressions, not documentation.
+- **Respect:** a sacred, living place. Priests and pilgrims appear as generic, unidentifiable figures in prayer, never posed for spectacle.
+- **King Lalibela** is a historical figure with no surviving likeness; he is drawn as an imagined, generic king (see ETHICS.md).
+
+### Revision log (v8 onwards)
+| Date | Shot | Change | Because |
+|---|---|---|---|
+| 2026-11-26 | all | v8: new story, 8 shots × 10 s, 74 Amharic words, new style block, `object_glossary` for Bete Giyorgis and rock-hewn churches, sounds `wind` (s01, s08) and `chisel` (s03, s04), closing title card | Story change (above) |

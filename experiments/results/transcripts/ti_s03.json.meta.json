@@ -1,0 +1,12 @@
+{
+  "input_hash": "ae5e5b5463a9da1c",
+  "stage": "ceiling_asr",
+  "shot_id": "ti_s03",
+  "provider": "google",
+  "model": "gemini-3.6-flash",
+  "seed": null,
+  "parameters": {
+    "temperature": 0.0
+  },
+  "created": "2026-11-26T02:30:00+00:00"
+}

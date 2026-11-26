@@ -55,6 +55,9 @@ Generated from `runs.jsonl` (299 log lines). Latency = wall-clock seconds spent 
 **Actually paid: $0.00** (free tiers only).
 <!-- END GENERATED -->
 
+## Frontier comparison
+**Not done: no access.** The frontier image, video and music models named in the brief (Nano Banana, Omni Flash, Lyria 3.5) need paid billing, and I did not have an organisation key for them. The closest comparison I could make was **within** the free tier: FLUX.2 klein 4B (newer) vs FLUX.1 schnell (E-05), and Gemini 3.8 Flash vs the 3.5 / 3.6 / 3.7 fallbacks under load (F-01, F-08).
+
 ## GPU minutes
 **0 GPU minutes used.** Kaggle's Wan 2.2 (F-07) was not run and ACE-Step (F-06) failed without returning logs, so every moving shot is Ken Burns and the score is composed on CPU. The 30 h/week Kaggle quota is untouched.
 

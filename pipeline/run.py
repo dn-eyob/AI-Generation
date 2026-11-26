@@ -7,7 +7,8 @@
 
 Stage order (each reads storyboard.json and writes to outputs/):
   0. validate   schema/storyboard.schema.json + timing/consistency rules
-  1. script     Gemini drafts the storyboard from DESIGN.md (never overwrites your edits)
+  1. script     (only with --draft) Gemini drafts a storyboard from DESIGN.md; never overwrites
+                storyboard.json. Skipped by default since the storyboard is hand-authored.
   2. narration  Gemini TTS, one WAV per shot, measured timings
   3. keyframes  Cloudflare FLUX.1 schnell, one still per shot
   4. shots      Wan clip from Kaggle if present, else Ken Burns (FFmpeg), 9:16 + 16:9
@@ -60,6 +61,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--shot", help="regenerate only this shot id (e.g. s04), then re-assemble")
     ap.add_argument("--force", action="store_true", help="ignore all caches")
+    ap.add_argument("--draft", action="store_true",
+                    help="also run the Gemini script stage (drafts from DESIGN.md; never overwrites storyboard.json)")
     a = ap.parse_args()
 
     start, t0 = log_position(), time.perf_counter()
@@ -67,7 +70,10 @@ def main() -> int:
         print("[0/6] validate");  sb = storyboard.load(); print("      " + storyboard.summary(sb))
         if a.shot and a.shot not in {s["id"] for s in sb["shots"]}:
             raise StageError(f"unknown shot id {a.shot}")
-        print("[1/6] script");    script.run(force=a.force)
+        if a.draft:
+            print("[1/6] script (--draft)"); script.run(force=a.force)
+        else:
+            print("[1/6] script: skipped (storyboard.json is hand-authored; use --draft to re-draft)")
         print("[2/6] narration"); narration.run(only=a.shot, force=a.force)
         print("[3/6] keyframes"); keyframes.run(only=a.shot, force=a.force)
         print("[4/6] shots");     shots.run(only=a.shot, force=a.force)

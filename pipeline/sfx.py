@@ -27,7 +27,7 @@ from pipeline.music import SR, write_wav
 
 SFX_DIR = OUTPUTS / "sfx"
 SFX_WAV = SFX_DIR / "sfx.wav"
-VERSION = "sfx-synth-v1"
+VERSION = "sfx-synth-v2"   # v2: + chisel, wind
 SEED = 9090
 
 
@@ -103,7 +103,32 @@ def clink(dur: float, rng) -> np.ndarray:
     return out
 
 
-EFFECTS = {"wash": wash, "roast": roast, "grind": grind, "pour": pour, "clink": clink}
+def chisel(dur: float, rng) -> np.ndarray:
+    """Iron chisel on volcanic stone: a bright metallic tap plus a short gritty impact."""
+    n = int(dur * SR)
+    out = np.zeros(n)
+    t = 0.5
+    while t < dur - 0.5:
+        k = int(0.25 * SR)
+        tt = np.arange(k) / SR
+        ring = sum(a * np.sin(2 * np.pi * f * tt) * np.exp(-tt * d)
+                   for f, a, d in ((1870, 0.5, 30), (3150, 0.35, 40), (4420, 0.2, 55)))
+        grit = band(rng.normal(0, 1, k), 1500, 6000) * np.exp(-tt * 60)
+        i = int(t * SR)
+        out[i:i + k] += (ring + grit) * rng.uniform(0.6, 1.0)
+        t += rng.uniform(0.45, 0.9)                                  # several workers, irregular
+    return fades(out, 0.2)
+
+
+def wind(dur: float, rng) -> np.ndarray:
+    """Highland wind: low band-passed noise with slow gusts."""
+    t = np.arange(int(dur * SR)) / SR
+    gust = 0.55 + 0.45 * np.sin(2 * np.pi * 0.13 * t + 0.7) * np.sin(2 * np.pi * 0.05 * t)
+    return fades(band(rng.normal(0, 1, len(t)), 120, 900) * gust, 1.5)
+
+
+EFFECTS = {"wash": wash, "roast": roast, "grind": grind, "pour": pour, "clink": clink,
+           "chisel": chisel, "wind": wind}
 
 
 def build(sb: dict, out: Path) -> dict:

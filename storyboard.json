@@ -1,22 +1,21 @@
 {
-  "title": "Three Rounds",
-  "title_native": "ሦስቱ ዙሮች",
-  "version": 7,
-  "logline": "Through the sacred ritual of three coffee rounds, an Ethiopian mother weaves together memory, family, and the enduring aroma of home across generations.",
-  "language": {
-    "narration": "am",
-    "subtitles": "en"
-  },
+  "title": "The King Who Built a Wonder in Stone",
+  "title_native": "በድንጋይ ድንቅ የሠራው ንጉሥ",
+  "slug": "wonder_in_stone",
+  "version": 8,
+  "logline": "A twelfth-century Ethiopian king dreams of a new Jerusalem, and generations of craftsmen carve it, church by church, out of the living rock of Lalibela.",
+  "end_card_title": "ETHIOPIA – A WONDER CARVED IN STONE",
+  "language": {"narration": "am", "subtitles": "en"},
   "style": {
-    "style_block": "warm hand-painted gouache illustration, earthy browns, coffee-bean reds and soft golds, golden afternoon light through a window, gentle film grain, simple shapes, calm and intimate",
+    "style_block": "epic hand-painted illustration, warm golden light, rich ochre and terracotta reds of volcanic rock, deep highland greens, soft atmospheric haze, gentle film grain, cinematic and reverent",
     "object_glossary": {
-      "jebena": "a traditional Ethiopian black clay coffee pot with a round bulbous base, a long narrow neck, a small spout and a handle joining neck and body, resting upright on a small woven ring stand"
+      "Bete Giyorgis": "a monolithic church carved downward into reddish volcanic rock, standing alone at the bottom of a deep square pit with sheer rock walls; seen from above, its flat roof is one large equal-armed cross with three nested cross outlines carved into it",
+      "rock-hewn church": "a church carved out of a single block of reddish-brown volcanic rock, with carved arched windows and doors, standing in a trench cut into the hillside"
     },
     "characters": [
       {
-        "id": "mother",
-        "description": "a generic Ethiopian woman in her fifties with a kind face, hair wrapped in a white cotton netela shawl with a thin woven border, wearing a white habesha dress with a woven tibeb trim",
-        "reference_image": "outputs/reference/schnell_2.png"
+        "id": "king",
+        "description": "a dignified Ethiopian king of the twelfth century, an imagined figure, with a short dark beard, wearing a white robe with gold embroidered borders and a simple gold crown, holding a wooden processional cross"
       }
     ]
   },
@@ -31,218 +30,97 @@
     "fps": 24
   },
   "music": {
-    "caption": "Contemplative Ethiopian ballad led by delicate krar plucking, soulful masenqo phrasing, and warm, gentle acoustic string swells creating an intimate, nostalgic atmosphere.",
-    "tempo_bpm": 72,
+    "caption": "Solemn, reverent Ethiopian-inspired score: plucked krar over a deep begena-like drone, slow and spacious, rising to a warm, majestic close.",
+    "tempo_bpm": 66,
     "key": "E minor",
     "instrumental": true,
-    "seed": 4242,
+    "seed": 5151,
     "cues": [
-      {
-        "id": "m01",
-        "from_shot": "s01",
-        "to_shot": "s04",
-        "intent": "Starts with solitary, gentle krar notes establishing quiet domestic intimacy and gradual anticipation."
-      },
-      {
-        "id": "m02",
-        "from_shot": "s05",
-        "to_shot": "s08",
-        "intent": "Builds with warm cello chords and delicate masenqo accents as the gathering breathes with shared life."
-      },
-      {
-        "id": "m03",
-        "from_shot": "s09",
-        "to_shot": "s10",
-        "intent": "Resolves into a full, resonant, and emotionally uplifting cadence evoking deep pride and homecoming."
-      }
+      {"id": "m01", "from_shot": "s01", "to_shot": "s03", "intent": "Starts with a lone krar over a quiet drone: dawn, and a king's dream."},
+      {"id": "m02", "from_shot": "s04", "to_shot": "s06", "intent": "Builds as the carving grows and the churches are revealed."},
+      {"id": "m03", "from_shot": "s07", "to_shot": "s08", "intent": "Resolves into a warm, majestic close over the sunset."}
     ]
   },
   "shots": [
     {
-      "id": "s01",
-      "beat": 1,
-      "reason": "Opens on the ritual being prepared (grass, incense, cups) in one shot, so the story reaches the roasting smoke sooner (User Test #1, P1).",
-      "shot_size": "wide",
-      "duration_sec": 8.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Centered wide view of the mother kneeling gracefully in the living room, scattering long blades of fresh green grass across the floor. Beside her rests a small clay incense burner with a thin, graceful plume of white smoke and a wooden tray of small white handle-less cups.",
-      "motion_prompt": "Incense smoke curls upward slowly as the camera pushes in gently toward the mother.",
-      "camera": "push_in",
-      "video_mode": "kenburns",
-      "seed": 1001,
-      "narration": "ቤቱ በቄጠማ ሲለብስ፣ የበረከቱ ጥሪ በዝምታ ይጀምራል።",
-      "subtitle": "When fresh grass dresses the floor, the quiet call of blessing begins."
+      "id": "s01", "beat": 1,
+      "reason": "Establishes the place and the age: dawn over the highlands, with the red rock of Lalibela waiting in the valley.",
+      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Sunrise over the green Ethiopian highlands, layered mountains in soft haze, and in the valley below the reddish rock of Lalibela with a rock-hewn church glimpsed among the hills, centred composition.",
+      "motion_prompt": "Morning mist drifts slowly as the camera pushes in.",
+      "camera": "push_in", "video_mode": "kenburns", "seed": 2001, "sfx": ["wind"],
+      "narration": "ከብዙ ዘመን በፊት፣ በኢትዮጵያ ደጋ፣ አንድ ንጉሥ ታላቅ ሕልም አለመ።",
+      "subtitle": "Long ago, in the highlands of Ethiopia, a king dreamed a great dream."
     },
     {
-      "id": "s02",
-      "beat": 2,
-      "reason": "Shows the first step of preparation, washing the green beans, which the audience asked to see (User Test #1, P1).",
-      "shot_size": "close_up",
-      "duration_sec": 7.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Close-up of only the mother's hands and forearms, no face in frame, washing raw green coffee beans in a shallow bowl of clear water, white sleeves with a woven trim, droplets catching the window light, fresh green grass around the bowl.",
-      "motion_prompt": "Water ripples gently as the hands stir the beans; camera static.",
-      "camera": "static",
-      "video_mode": "kenburns",
-      "seed": 1002,
-      "narration": "በመጀመሪያ ጥሬው ቡና በንጹህ ውሃ ይታጠባል።",
-      "subtitle": "First, the green beans are washed in clean water.",
-      "sfx": [
-        "wash"
-      ]
+      "id": "s02", "beat": 1,
+      "reason": "Introduces the king and his vision, a new Jerusalem in Ethiopia, the idea the whole film follows.",
+      "shot_size": "wide", "duration_sec": 10.0, "characters": ["king"],
+      "image_prompt": "The king stands on a mountain ridge at dawn, centred, gazing out over his kingdom of terraced hills, his advisers beside him seen only from behind as robed silhouettes.",
+      "motion_prompt": "Robes stir in the wind as the camera pans slowly right.",
+      "camera": "pan_right", "video_mode": "kenburns", "seed": 2002,
+      "narration": "ስሙ ንጉሥ ላሊበላ ነበር። በኢትዮጵያ ምድር አዲስ ኢየሩሳሌምን ለመሥራት ተነሳ።",
+      "subtitle": "His name was King Lalibela. He set out to build a new Jerusalem in Ethiopia."
     },
     {
-      "id": "s03",
-      "beat": 2,
-      "reason": "Highlights the roasting smoke as the sensory beacon that summons loved ones without speaking.",
-      "shot_size": "medium",
-      "duration_sec": 8.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Medium shot centered on the mother holding a round black roasting pan over glowing charcoal embers, shaking darkening coffee beans as thick, aromatic white smoke billows softly toward the window.",
-      "motion_prompt": "Coffee roasting smoke billows softly upward as the camera tilts up slowly.",
-      "camera": "tilt_up",
-      "video_mode": "wan",
-      "seed": 1003,
-      "narration": "የቡናው ጢስ ሲወጣ፣ መጥሪያ ደወል አያስፈልገውም።",
-      "subtitle": "When the roasted smoke rises, no words are needed to call us.",
-      "sfx": [
-        "roast"
-      ]
+      "id": "s03", "beat": 2,
+      "reason": "Shows the impossible challenge: not building with stones, but carving whole churches out of one rock.",
+      "shot_size": "wide", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Ethiopian stone workers in simple white cotton clothing gather around an enormous reddish volcanic rock outcrop, holding iron chisels, hammers and wooden mallets, centred, the workers seen mostly from behind and in profile.",
+      "motion_prompt": "Dust drifts in the light as the camera tilts down slowly.",
+      "camera": "tilt_down", "video_mode": "kenburns", "seed": 2003, "sfx": ["chisel"],
+      "narration": "አብያተ ክርስቲያናቱ በድንጋይ አይገነቡም፤ ከአንድ ዓለት ተፈልፍለው ይሠራሉ።",
+      "subtitle": "The churches would not be built from stones, but carved from a single rock."
     },
     {
-      "id": "s04",
-      "beat": 2,
-      "reason": "Shows how the aroma unites the household, drawing relatives out of separate spaces into shared warmth.",
-      "shot_size": "wide",
-      "duration_sec": 7.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Wide shot looking across the room where dark silhouettes of family members step through doorways, drawn into the warm center where the mother sits enveloped in fragrant steam.",
-      "motion_prompt": "Silhouettes quietly step forward and gather while the camera remains static.",
-      "camera": "static",
-      "video_mode": "kenburns",
-      "seed": 1004,
-      "narration": "ከየክፍሉ አንድ በአንድ፣ ሽታው ሰብስቦ ያመጣናል።",
-      "subtitle": "From every room, the aroma draws us together one by one."
+      "id": "s04", "beat": 2,
+      "reason": "Honours the craftsmen: the skill and patience of generations who turned a mountain into architecture.",
+      "shot_size": "medium", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Workers carving the walls, pillars, arched windows and a doorway of a rock-hewn church out of reddish rock, stone dust glowing in shafts of sunlight, faces turned to their work, centred.",
+      "motion_prompt": "Stone dust floats in the sunbeams as the camera pushes in.",
+      "camera": "push_in", "video_mode": "kenburns", "seed": 2004, "sfx": ["chisel"],
+      "narration": "በታላቅ ጥበብና ትዕግሥት፣ ጠራቢዎች ተራራውን ወደ አስደናቂ ሕንጻ ለወጡት።",
+      "subtitle": "With great skill and patience, carvers turned the mountain into wonders."
     },
     {
-      "id": "s05",
-      "beat": 3,
-      "reason": "Shows grinding the roasted beans with the jebena boiling behind it: preparation detail plus a clear view of the jebena (User Test #1, P1 and P3).",
-      "shot_size": "medium_close_up",
-      "duration_sec": 8.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Centred medium close-up of the mother's hands pounding dark roasted coffee beans with a wooden pestle in a carved wooden mortar, a black clay jebena steaming on a small charcoal stove just behind.",
-      "motion_prompt": "Steam drifts from the jebena spout as the camera pulls out slowly.",
-      "camera": "pull_out",
-      "video_mode": "kenburns",
-      "seed": 1005,
-      "narration": "የተቆላው ቡና በሙቀጫ ይወቀጣል፤ ጀበናውም ይፈላል።",
-      "subtitle": "The roasted beans are pounded, and the jebena comes to a boil.",
-      "sfx": [
-        "grind"
-      ]
+      "id": "s05", "beat": 3,
+      "reason": "The reveal: eleven churches standing in their trenches, the scale of the achievement seen from above.",
+      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "High aerial view of several rock-hewn churches standing in deep trenches cut into reddish rock, one large rock-hewn church surrounded by rows of carved stone columns, green hills around, centred.",
+      "motion_prompt": "Soft clouds pass as the camera pulls out slowly.",
+      "camera": "pull_out", "video_mode": "kenburns", "seed": 2005,
+      "narration": "አሥራ አንድ ውቅር አብያተ ክርስቲያናት ተፈጠሩ፤ ከዓለም ድንቆች አንዱ።",
+      "subtitle": "Eleven rock-hewn churches emerged, one of the wonders of the world."
     },
     {
-      "id": "s06",
-      "beat": 3,
-      "reason": "Celebrates Abol, the first round that unlocks laughter, conversation, and collective connection.",
-      "shot_size": "medium",
-      "duration_sec": 8.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Medium shot centered on the mother pouring an uninterrupted dark stream of coffee from the jebena high above into several small cups in sequence, a bowl of white popcorn resting beside the tray.",
-      "motion_prompt": "A continuous stream of dark coffee pours into cups as the camera pushes in slowly.",
-      "camera": "push_in",
-      "video_mode": "wan",
-      "seed": 1006,
-      "narration": "አቦል የመጀመሪያው ጽዋ፣ የጨዋታና የሳቅ መጀመሪያ ነው።",
-      "subtitle": "Abol, the first round, sparks our laughter and shared stories.",
-      "sfx": [
-        "pour"
-      ]
+      "id": "s06", "beat": 3,
+      "reason": "The most famous image of Lalibela: Bete Giyorgis, the cross carved down into the earth.",
+      "shot_size": "extreme_wide", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Dramatic aerial view looking straight down on Bete Giyorgis, centred in the frame, warm afternoon light and long shadows.",
+      "motion_prompt": "Light shifts across the rock as the camera pushes in slowly.",
+      "camera": "push_in", "video_mode": "kenburns", "seed": 2006,
+      "narration": "ከነዚህም መካከል ቤተ ጊዮርጊስ፣ በመስቀል ቅርጽ ወደ ምድር ጥልቅ ተፈልፍሏል።",
+      "subtitle": "Among them, Bete Giyorgis, carved deep into the earth in the shape of a cross."
     },
     {
-      "id": "s07",
-      "beat": 4,
-      "reason": "Captures the transmission of heritage across generations through the second cup.",
-      "shot_size": "close_up",
-      "duration_sec": 7.0,
-      "characters": [],
-      "image_prompt": "Centred close-up of a silhouette elder hand gently offering a warm porcelain cup of coffee into the small, eager hands of a young family member, steam rising between their palms.",
-      "motion_prompt": "Hands exchange the warm cup smoothly as the camera pans left slowly.",
-      "camera": "pan_left",
-      "video_mode": "kenburns",
-      "seed": 1007,
-      "narration": "ቶና ሲደገም፣ የታሪኩ ፈትል ወደ ታናናሾቹ ይሻገራል።",
-      "subtitle": "With Tona, the thread of memory passes gently to younger hands.",
-      "sfx": [
-        "clink"
-      ]
+      "id": "s07", "beat": 4,
+      "reason": "Shows the churches are alive, not ruins: priests and pilgrims still pray there today.",
+      "shot_size": "medium", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Ethiopian Orthodox priests in white robes and white turbans holding ornate hand crosses, and pilgrims wrapped in white netela shawls, praying beside a rock-hewn church, candles glowing, figures seen from behind and in soft profile, centred.",
+      "motion_prompt": "Candle flames flicker as the camera pans slowly left.",
+      "camera": "pan_left", "video_mode": "kenburns", "seed": 2007,
+      "narration": "ዛሬም፣ ከዘመናት በኋላ፣ የጸሎት፣ የመንፈሳዊ ጉዞና የእምነት ስፍራ ናቸው።",
+      "subtitle": "Centuries later, they remain places of prayer, pilgrimage and faith."
     },
     {
-      "id": "s08",
-      "beat": 4,
-      "reason": "Emphasizes the warmth of oral storytelling and quiet listening among family members.",
-      "shot_size": "medium",
-      "duration_sec": 7.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Medium composition centred on a carved wooden bowl heaped with white popcorn on a low table, family members seen only from behind as soft dark silhouettes, the older mother smiling softly and slightly out of focus in the background.",
-      "motion_prompt": "A silhouette hand reaches in to take popcorn while the camera holds static.",
-      "camera": "static",
-      "video_mode": "kenburns",
-      "seed": 1008,
-      "narration": "ያለፉት ቀናት ወጎች በልጆቹ ጆሮ ዳግም ህያው ይሆናሉ።",
-      "subtitle": "Timeless stories come alive once more in listening ears."
-    },
-    {
-      "id": "s09",
-      "beat": 5,
-      "reason": "Delivers the emotional core of Bereka, blessing the family and safeguarding their bond.",
-      "shot_size": "medium",
-      "duration_sec": 8.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Centred medium shot of the older mother, in her fifties with grey hair at her temples and gentle wrinkles, holding a small handle-less coffee cup with both hands against her heart, eyes softly closed in a silent blessing.",
-      "motion_prompt": "The mother holds the cup securely as the camera pushes in slowly.",
-      "camera": "push_in",
-      "video_mode": "kenburns",
-      "seed": 1009,
-      "narration": "በረካ የመጨረሻው ምርቃት፣ ፍቅርንና ሰላምን ያትማል።",
-      "subtitle": "Bereka, the blessing cup, seals enduring love and peace."
-    },
-    {
-      "id": "s10",
-      "beat": 5,
-      "reason": "Lands pride and warmth for family far from home; held longer so the final line and the rising smoke have room to settle (User Test #1, P2).",
-      "shot_size": "wide",
-      "duration_sec": 12.0,
-      "characters": [
-        "mother"
-      ],
-      "image_prompt": "Centered wide composition of the ceramic cups, the resting jebena, and sweet incense smoke rising gently into the golden window light, with the quiet silhouettes of the united family seated peacefully around.",
-      "motion_prompt": "Fragrant smoke rises in elegant spirals as the camera tilts up slowly.",
-      "camera": "tilt_up",
-      "video_mode": "kenburns",
-      "seed": 1010,
-      "narration": "በየትኛውም ምድር ብንኖር፣ ይሄ የቤታችን እና የትውስታችን ጠረን ነው።",
-      "subtitle": "Wherever we are in the world, this is what home smells like.",
-      "sfx": [
-        "clink"
-      ]
+      "id": "s08", "beat": 5,
+      "reason": "Lands the message: Lalibela's legacy as Ethiopia's pride, closing on the cross at sunset.",
+      "shot_size": "wide", "duration_sec": 10.0, "characters": [],
+      "image_prompt": "Golden sunset over Lalibela, long shadows across the reddish rock, Bete Giyorgis glowing at the centre in its deep pit, highland mountains behind.",
+      "motion_prompt": "The camera moves slowly toward the church as the light fades.",
+      "camera": "push_in", "video_mode": "kenburns", "seed": 2008, "sfx": ["wind"],
+      "narration": "ላሊበላ ለዓለም ይመሰክራል፤ የኢትዮጵያ ሀብት ታሪኳ፣ እምነቷና ቅርሷ ነው።",
+      "subtitle": "Lalibela tells the world: Ethiopia's treasures are its history, faith and heritage."
     }
   ]
 }

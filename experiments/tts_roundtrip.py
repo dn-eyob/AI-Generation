@@ -4,8 +4,8 @@ Question (from the challenge brief): "We could not confirm that every model hand
 [Afaan Oromo, Tigrinya, Somali] well; find out, and document exactly where they fail."
 
 Method (round trip, no human raters needed for the first pass):
-  1. Take 3 narration lines from the film (s03, s07, s10).
-       Amharic = the film's own narration text and audio (already generated).
+  1. Take 3 narration lines from the coffee-ceremony film (s03, s07, s10; archived storyboard v7).
+       Amharic = that film's own narration text and audio (archived in results/audio/am_*.wav).
        Tigrinya (ti), Afaan Oromo (om), Somali (so) = Gemini translation of the English subtitle.
   2. Speak each line with gemini-3.8-flash-tts (same voice and style as the film).
   3. A separate Gemini model transcribes the audio *blind* (not told the language or the text)
@@ -84,8 +84,8 @@ def translate(sb: dict) -> dict:
 
 
 def speak(lang: str, sid: str, text: str, sb: dict) -> Path:
-    if lang == "am":                                   # reuse the film's own narration
-        return OUTPUTS / "narration" / f"{sid}.wav"
+    if lang == "am":   # the coffee film's own narration, archived when the story changed
+        return AUDIO / f"am_{sid}.wav"
     d = sb["defaults"]
     out = AUDIO / f"{lang}_{sid}.wav"
 
@@ -146,8 +146,13 @@ def cer(ref: str, hyp: str) -> float:
     return round(prev[-1] / max(len(r), 1), 3)
 
 
+# The experiment was run on the coffee-ceremony film's lines (storyboard v7). The film's
+# story later changed (DESIGN.md §6), so the experiment pins that archived storyboard.
+SOURCE_STORYBOARD = ROOT / "archive" / "three_rounds" / "storyboard_v7.json"
+
+
 def run() -> None:
-    sb = storyboard.load()
+    sb = storyboard.load(SOURCE_STORYBOARD)
     RES.mkdir(parents=True, exist_ok=True); AUDIO.mkdir(parents=True, exist_ok=True)
     tr = translate(sb)
     shots = {s["id"]: s for s in sb["shots"]}
