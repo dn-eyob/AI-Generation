@@ -1,5 +1,5 @@
 {
-  "input_hash": "b060561cd563a78a",
+  "input_hash": "0f442669c33081ea",
   "stage": "shots",
   "shot_id": "s08/horizontal",
   "provider": "local",
@@ -10,7 +10,8 @@
     "duration_sec": 7.0,
     "aspect": "horizontal",
     "zoom": 0.12,
-    "fps": 24
+    "fps": 24,
+    "crop": "iw:iw*9/16:0:(ih-iw*9/16)*0.3"
   },
-  "created": "2026-11-25T23:31:31+00:00"
+  "created": "2026-11-25T23:52:48+00:00"
 }

@@ -1,0 +1,21 @@
+{
+  "input_hash": "d7107a42fb95eb51",
+  "stage": "assemble_video",
+  "shot_id": "horizontal",
+  "provider": "local",
+  "model": "ffmpeg",
+  "seed": null,
+  "parameters": {
+    "style": {
+      "size": [
+        1280,
+        720
+      ],
+      "wrap": 42,
+      "style": "FontName=Arial,FontSize=15,MarginV=18"
+    },
+    "fps": 24,
+    "crf": 20
+  },
+  "created": "2026-11-25T23:58:40+00:00"
+}

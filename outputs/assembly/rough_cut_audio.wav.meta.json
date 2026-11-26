@@ -1,0 +1,24 @@
+{
+  "input_hash": "e3a0ac62b552698a",
+  "stage": "assemble_audio",
+  "shot_id": null,
+  "provider": "local",
+  "model": "ffmpeg",
+  "seed": null,
+  "parameters": {
+    "duck": {
+      "threshold": 0.02,
+      "ratio": 6,
+      "attack": 300,
+      "release": 1500
+    },
+    "target": {
+      "I": -14.0,
+      "TP": -1.0,
+      "LRA": 11.0
+    },
+    "voice_lufs": -16,
+    "music_lufs": -26
+  },
+  "created": "2026-11-25T23:39:55+00:00"
+}

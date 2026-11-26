@@ -27,8 +27,8 @@ def shot_starts(sb: dict) -> dict[str, float]:
     return starts
 
 
-def wrap(text: str) -> str:
-    lines = textwrap.wrap(text, width=MAX_LINE_CHARS)
+def wrap(text: str, width: int = MAX_LINE_CHARS) -> str:
+    lines = textwrap.wrap(text, width=width)
     if len(lines) > 2:   # rebalance into two lines rather than three
         half = len(text) // 2
         split = text.rfind(" ", 0, half + 10)
@@ -36,7 +36,8 @@ def wrap(text: str) -> str:
     return "\n".join(lines)
 
 
-def cues(sb: dict, timings_path: Path = TIMINGS_PATH) -> list[tuple[float, float, str]]:
+def cues(sb: dict, timings_path: Path = TIMINGS_PATH,
+         width: int = MAX_LINE_CHARS) -> list[tuple[float, float, str]]:
     timings = {r["shot_id"]: r for r in json.loads(timings_path.read_text(encoding="utf-8"))["shots"]}
     starts = shot_starts(sb)
     out = []
@@ -46,7 +47,7 @@ def cues(sb: dict, timings_path: Path = TIMINGS_PATH) -> list[tuple[float, float
             continue
         start = starts[s["id"]] + NARRATION_OFFSET_SEC
         end = min(start + spoken + 0.2, starts[s["id"]] + float(s["duration_sec"]))
-        out.append((start, end, wrap(s["subtitle"])))
+        out.append((start, end, wrap(s["subtitle"], width)))
     return out
 
 

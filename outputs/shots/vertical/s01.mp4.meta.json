@@ -1,5 +1,5 @@
 {
-  "input_hash": "5cbbb881cb50d328",
+  "input_hash": "52b9cc85cd548e62",
   "stage": "shots",
   "shot_id": "s01/vertical",
   "provider": "local",
@@ -10,7 +10,8 @@
     "duration_sec": 8.0,
     "aspect": "vertical",
     "zoom": 0.12,
-    "fps": 24
+    "fps": 24,
+    "crop": "ih*9/16:ih"
   },
-  "created": "2026-11-25T23:27:29+00:00"
+  "created": "2026-11-25T23:47:21+00:00"
 }

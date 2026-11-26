@@ -32,7 +32,9 @@ WAN_DIR = OUTPUTS / "wan"
 FPS = 24
 ASPECTS = {
     "vertical": {"crop": "ih*9/16:ih", "work": "1440:2560", "out": (720, 1280)},
-    "horizontal": {"crop": "iw:iw*9/16", "work": "2560:1440", "out": (1280, 720)},
+    # horizontal: take the band 30% from the top, not the centre - faces sit high in the
+    # square keyframes and a centred 16:9 crop cut the mother's head off (rough cut, E-08)
+    "horizontal": {"crop": "iw:iw*9/16:0:(ih-iw*9/16)*0.3", "work": "2560:1440", "out": (1280, 720)},
 }
 MAX_SLOWDOWN = 1.6
 ZOOM = 0.12   # 12% zoom range: slow, gentle
@@ -82,8 +84,9 @@ def wan_cmd(clip: Path, out: Path, dur: float, aspect: str) -> list[str]:
     clip_sec = probe_seconds(clip)
     slow = min(MAX_SLOWDOWN, max(1.0, dur / clip_sec))
     hold = max(0.0, dur - clip_sec * slow)
-    crop = "ih*9/16:ih" if aspect == "vertical" else "iw:iw*9/16"
-    vf = (f"crop='min(iw,{crop.split(':')[0]})':'min(ih,{crop.split(':')[1]})',"
+    crop = ("crop='min(iw,ih*9/16)':ih" if aspect == "vertical"
+            else "crop=iw:'min(ih,iw*9/16)':0:'(ih-min(ih,iw*9/16))*0.3'")
+    vf = (f"{crop},"
           f"scale={w}:{h}:flags=lanczos,setpts={slow:.3f}*PTS,fps={FPS},"
           f"tpad=stop_mode=clone:stop_duration={hold:.3f},trim=duration={dur},format=yuv420p")
     return ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(clip), "-an",
@@ -121,7 +124,8 @@ def run(only: str | None = None, force: bool = False) -> None:
             r = cached_call(stage="shots", shot_id=f"{sid}/{aspect}", provider="local",
                             model=f"ffmpeg-{mode}",
                             parameters={"camera": shot["camera"], "duration_sec": dur,
-                                        "aspect": aspect, "zoom": ZOOM, "fps": FPS},
+                                        "aspect": aspect, "zoom": ZOOM, "fps": FPS,
+                                        "crop": ASPECTS[aspect]["crop"]},
                             seed=None, inputs={"source": src_hash, "mode": mode},
                             output=out, fn=make, max_attempts=1, force=force)
             fell_back = shot.get("video_mode") == "wan" and not use_wan
