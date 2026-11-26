@@ -6,8 +6,8 @@ The film is generated from one file, [`storyboard.json`](storyboard.json), by a 
 
 | | |
 |---|---|
-| 🎬 Film (9:16) | TODO: public link |
-| 🎬 Film (16:9) | TODO: public link |
+| 🎬 Film (9:16, main) | https://youtube.com/shorts/8m-pmgWALgE (verified playing signed-out, 2026-11-26) |
+| 🎬 Film (16:9) | https://youtu.be/MtDooMUs4Bs (verified public via YouTube oEmbed, 2026-11-26) |
 | 🎥 Walkthrough (≤ 5 min) | TODO: public link |
 | Local files | `outputs/final/wonder_in_stone_vertical.mp4`, `outputs/final/wonder_in_stone_horizontal.mp4` |
 
@@ -89,7 +89,7 @@ Details: **[ARCHITECTURE.md](ARCHITECTURE.md)** (contracts, caching, failure han
 
 ## What it cost
 
-**$0 paid.** At paid-tier list prices the AI calls for the whole project come to **about $0.05**; most time is spent encoding video locally, not waiting on models. Generated table: [COSTS.md](COSTS.md).
+**$0 paid.** At paid-tier list prices the AI calls for the whole project (two films + experiments) come to **about $0.08**; most time is spent encoding video locally, not waiting on models. Generated table: [COSTS.md](COSTS.md).
 
 ## Project documents
 

@@ -7,7 +7,7 @@ FLUX.1 schnell $0.0000528 per 512×512 tile + $0.0001056 per step; FLUX.2 klein 
 `gemini-3.5-flash` is not on the pricing page, so its calls are counted as "unpriced", not guessed.
 
 ### Headline numbers
-- **Most expensive stage by list price:** keyframes and narration (each about $0.015 for the whole film). The whole film's AI calls would cost **about 5 US cents** on paid tiers.
+- **Most expensive stage by list price:** keyframes and narration (each about $0.015 for the whole film). All AI calls for the project (two films: *Three Rounds* v1–v7 and the Lalibela film v8+, plus experiments) would cost **about 8 US cents** on paid tiers.
 - **The real cost is time, not money:** most wall-clock time is local FFmpeg encoding (Ken Burns + two 83 s exports), not model calls. A single-shot regeneration is dominated by re-encoding the two final videos (about 2–3 min each).
 - **Reliability is the hidden cost:** 9 retries and 6 errors, nearly all `503 high demand` from Gemini text models (FAILURES F-01, F-03, F-08). The one slow success took 343 s.
 
