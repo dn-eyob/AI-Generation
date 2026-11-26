@@ -11,7 +11,7 @@ The film is generated from one file, [`storyboard.json`](storyboard.json), by a 
 | 🎥 Walkthrough (≤ 5 min) | TODO: public link |
 | Local files | `outputs/final/wonder_in_stone_vertical.mp4`, `outputs/final/wonder_in_stone_horizontal.mp4` |
 
-> **Story history:** the pipeline first made *Three Rounds*, a film about my family's coffee ceremony (storyboard v1–v7, User Test #1). Late in the project I changed the story to Lalibela (v8+); the reasons and honest consequences are in [DESIGN.md §6](DESIGN.md), and the first film is archived in [`archive/three_rounds/`](archive/three_rounds/). Same pipeline, new storyboard: the change itself shows the pipeline is reusable.
+> **Development history:** the pipeline was built and first user-tested on an earlier development storyboard (v1–v7). That work is kept as evidence in [DESIGN.md](DESIGN.md) §1–5, [EXPERIMENTS.md](EXPERIMENTS.md) and [FAILURES.md](FAILURES.md); the film is storyboard v8+ ([DESIGN.md §6](DESIGN.md)).
 
 ## Run it
 
@@ -89,7 +89,7 @@ Details: **[ARCHITECTURE.md](ARCHITECTURE.md)** (contracts, caching, failure han
 
 ## What it cost
 
-**$0 paid.** At paid-tier list prices the AI calls for the whole project (two films + experiments) come to **about $0.08**; most time is spent encoding video locally, not waiting on models. Generated table: [COSTS.md](COSTS.md).
+**$0 paid.** At paid-tier list prices the AI calls for the whole project (development + final film + experiments) come to **about $0.08**; most time is spent encoding video locally, not waiting on models. Generated table: [COSTS.md](COSTS.md).
 
 ## Project documents
 

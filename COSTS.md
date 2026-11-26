@@ -7,7 +7,7 @@ FLUX.1 schnell $0.0000528 per 512×512 tile + $0.0001056 per step; FLUX.2 klein 
 `gemini-3.5-flash` is not on the pricing page, so its calls are counted as "unpriced", not guessed.
 
 ### Headline numbers
-- **Most expensive stage by list price:** keyframes and narration (each about $0.015 for the whole film). All AI calls for the project (two films: *Three Rounds* v1–v7 and the Lalibela film v8+, plus experiments) would cost **about 8 US cents** on paid tiers.
+- **Most expensive stage by list price:** keyframes and narration (each about $0.015 for the whole film). All AI calls for the project (development storyboards v1–v7, the final film v8+, and the experiments) would cost **about 8 US cents** on paid tiers.
 - **The real cost is time, not money:** most wall-clock time is local FFmpeg encoding (Ken Burns + two 83 s exports), not model calls. A single-shot regeneration is dominated by re-encoding the two final videos (about 2–3 min each).
 - **Reliability is the hidden cost:** 9 retries and 6 errors, nearly all `503 high demand` from Gemini text models (FAILURES F-01, F-03, F-08). The one slow success took 343 s.
 
@@ -25,7 +25,7 @@ FLUX.1 schnell $0.0000528 per 512×512 tile + $0.0001056 per step; FLUX.2 klein 
 ## Free-tier limits actually observed
 | Provider | Limit observed | Date checked |
 |---|---|---|
-| Google AI Studio | Free tier for Gemini 3.8 Flash, 3.5 Flash-Lite and 3.8 Flash TTS ("Free of charge" on the pricing page). No numeric limit hit; the practical limit was **503 "high demand"** overloads at peak times, not quota errors | 2026-11-26 |
+| Google AI Studio | Free tier for Gemini 3.8 Flash, 3.5 Flash-Lite and 3.8 Flash TTS ("Free of charge" on the pricing page). The practical limit was **503 "high demand"** overloads at peak times; then, during the Phase 4 experiment (~20 text calls with audio input in a short window), **429 RESOURCE_EXHAUSTED: "You exceeded your current quota"** on several Flash models, which stopped the experiment at 5/12 clips (E-12, F-08). TTS kept working throughout | 2026-11-26 |
 | Cloudflare Workers AI | **10,000 neurons/day** free (pricing page). FLUX.1 schnell 1024×1024 at 8 steps = 4×4.8 + 8×9.6 = **96 neurons/image → about 104 images/day**. This project used 19 schnell images + 3 klein images in total | 2026-11-26 |
 | Kaggle | 30 GPU hours/week (shown in notebook session options, GPU T4 ×2) | 2026-11-25 |
 

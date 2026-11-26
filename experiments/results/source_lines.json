@@ -1,0 +1,17 @@
+{
+  "note": "The 3 Amharic narration lines (+ English) used as the experiment's source text, taken from the development storyboard v7. The matching Amharic audio is in audio/am_*.wav.",
+  "lines": {
+    "s03": {
+      "narration": "የቡናው ጢስ ሲወጣ፣ መጥሪያ ደወል አያስፈልገውም።",
+      "subtitle": "When the roasted smoke rises, no words are needed to call us."
+    },
+    "s07": {
+      "narration": "ቶና ሲደገም፣ የታሪኩ ፈትል ወደ ታናናሾቹ ይሻገራል።",
+      "subtitle": "With Tona, the thread of memory passes gently to younger hands."
+    },
+    "s10": {
+      "narration": "በየትኛውም ምድር ብንኖር፣ ይሄ የቤታችን እና የትውስታችን ጠረን ነው።",
+      "subtitle": "Wherever we are in the world, this is what home smells like."
+    }
+  }
+}

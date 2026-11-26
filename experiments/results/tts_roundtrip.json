@@ -1,0 +1,104 @@
+{
+  "summary": {
+    "am": {
+      "language": "Amharic",
+      "clips": 3,
+      "mean_cer": 0.271,
+      "lang_id_correct": "3/3",
+      "mean_chars_per_sec": 5.7
+    },
+    "ti": {
+      "language": "Tigrinya",
+      "clips": 2,
+      "mean_cer": 0.275,
+      "lang_id_correct": "2/2",
+      "mean_chars_per_sec": 5.8
+    },
+    "om": {
+      "language": "Afaan Oromo",
+      "mean_cer": null,
+      "lang_id_correct": "0/0",
+      "mean_chars_per_sec": null,
+      "clips": 0
+    },
+    "so": {
+      "language": "Somali",
+      "mean_cer": null,
+      "lang_id_correct": "0/0",
+      "mean_chars_per_sec": null,
+      "clips": 0
+    }
+  },
+  "rows": [
+    {
+      "lang": "am",
+      "shot": "s03",
+      "text": "የቡናው ጢስ ሲወጣ፣ መጥሪያ ደወል አያስፈልገውም።",
+      "transcript": "የቡናው እስኪወጣ መጥሪያ ደወል ያስፈልጋል።",
+      "heard_lang": "am",
+      "lang_id_ok": true,
+      "cer": 0.241,
+      "audio_sec": 4.88,
+      "asr_model": "gemini-3.5-flash",
+      "chars_per_sec": 5.9
+    },
+    {
+      "lang": "am",
+      "shot": "s07",
+      "text": "ቶና ሲደገም፣ የታሪኩ ፈትል ወደ ታናናሾቹ ይሻገራል።",
+      "transcript": "ቶን እና ሲደገም የታሪኩ ፈትል ወደ ታናናሾቹ ይሻገራል።",
+      "heard_lang": "amh",
+      "lang_id_ok": true,
+      "cer": 0.097,
+      "audio_sec": 6.06,
+      "asr_model": "gemini-3.6-flash",
+      "chars_per_sec": 5.1
+    },
+    {
+      "lang": "am",
+      "shot": "s10",
+      "text": "በየትኛውም ምድር ብንኖር፣ ይሄ የቤታችን እና የትውስታችን ጠረን ነው።",
+      "transcript": "ቤት አያምድርብን ኖር፤ ይህ የቤታችንና የተወሰነ ጥር ነው።",
+      "heard_lang": "am",
+      "lang_id_ok": true,
+      "cer": 0.476,
+      "audio_sec": 6.89,
+      "asr_model": "gemini-3.5-flash",
+      "chars_per_sec": 6.1
+    },
+    {
+      "lang": "ti",
+      "shot": "s03",
+      "text": "ትኪ ቡን ምስ ደየበ፡ ቃል ኣየድልየናን እዩ።",
+      "transcript": "ጥቅቡን ምስ ደየበ ቃል አይድልየኒዩ",
+      "heard_lang": "ti",
+      "lang_id_ok": true,
+      "cer": 0.346,
+      "audio_sec": 4.6,
+      "asr_model": "gemini-3.6-flash",
+      "chars_per_sec": 5.7
+    },
+    {
+      "lang": "ti",
+      "shot": "s07",
+      "text": "ምስ ቶና፡ ፈትሊ ተዘክሮ ብህድኣት ናብ ንኣሽቱ ኣእዳው ይሰጋገር።",
+      "transcript": "ምስጦና ፈትል ተዘክሮ በህድኣት ናብ ናእሽቱ አእዳው ይሸጋገር።",
+      "heard_lang": "ti",
+      "lang_id_ok": true,
+      "cer": 0.205,
+      "audio_sec": 6.48,
+      "asr_model": "gemini-3.6-flash",
+      "chars_per_sec": 6.0
+    }
+  ],
+  "partial": true,
+  "missing": [
+    "ti_s10",
+    "om_s03",
+    "om_s07",
+    "om_s10",
+    "so_s03",
+    "so_s07",
+    "so_s10"
+  ]
+}

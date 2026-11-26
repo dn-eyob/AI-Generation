@@ -4,8 +4,8 @@ Question (from the challenge brief): "We could not confirm that every model hand
 [Afaan Oromo, Tigrinya, Somali] well; find out, and document exactly where they fail."
 
 Method (round trip, no human raters needed for the first pass):
-  1. Take 3 narration lines from the coffee-ceremony film (s03, s07, s10; archived storyboard v7).
-       Amharic = that film's own narration text and audio (archived in results/audio/am_*.wav).
+  1. Take 3 Amharic narration lines (results/source_lines.json, from development storyboard v7)
+       and their Amharic audio (results/audio/am_*.wav).
        Tigrinya (ti), Afaan Oromo (om), Somali (so) = Gemini translation of the English subtitle.
   2. Speak each line with gemini-3.8-flash-tts (same voice and style as the film).
   3. A separate Gemini model transcribes the audio *blind* (not told the language or the text)
@@ -64,8 +64,8 @@ def text_call(stage: str, shot_id: str, out: Path, prompt_inputs: dict, make) ->
     raise StageError(f"{stage}/{shot_id}: all text models failed: {last}")
 
 
-def translate(sb: dict) -> dict:
-    lines = {s["id"]: s["subtitle"] for s in sb["shots"] if s["id"] in SHOTS}
+def translate(source: dict) -> dict:
+    lines = {sid: source[sid]["subtitle"] for sid in SHOTS}
     prompt = ("Translate each English line into Tigrinya (ti, Ge'ez script), Afaan Oromo (om, Latin "
               "script, Qubee) and Somali (so, Latin script). Keep them natural, short and spoken. "
               f"Lines: {json.dumps(lines, ensure_ascii=False)}\n"
@@ -146,22 +146,39 @@ def cer(ref: str, hyp: str) -> float:
     return round(prev[-1] / max(len(r), 1), 3)
 
 
-# The experiment was run on the coffee-ceremony film's lines (storyboard v7). The film's
-# story later changed (DESIGN.md §6), so the experiment pins that archived storyboard.
-SOURCE_STORYBOARD = ROOT / "archive" / "three_rounds" / "storyboard_v7.json"
+# The experiment's source text is pinned in its own folder (3 Amharic lines from the
+# development storyboard v7), so it doesn't change when the film's storyboard does.
+SOURCE_LINES = RES / "source_lines.json"
 
 
-def run() -> None:
-    sb = storyboard.load(SOURCE_STORYBOARD)
+def cached_transcript(lang: str, sid: str) -> dict | None:
+    out = RES / "transcripts" / f"{lang}_{sid}.json"
+    meta = out.with_name(out.name + ".meta.json")
+    if not (out.exists() and meta.exists()):
+        return None
+    data = json.loads(out.read_text(encoding="utf-8"))
+    return {**data, "_asr_model": json.loads(meta.read_text(encoding="utf-8")).get("model")}
+
+
+def run(partial: bool = False) -> None:
+    """partial=True: no API calls; report only clips whose audio + transcript are already cached."""
+    sb = storyboard.load()                      # only for the TTS voice/style defaults
     RES.mkdir(parents=True, exist_ok=True); AUDIO.mkdir(parents=True, exist_ok=True)
-    tr = translate(sb)
-    shots = {s["id"]: s for s in sb["shots"]}
-    rows = []
+    shots = json.loads(SOURCE_LINES.read_text(encoding="utf-8"))["lines"]
+    tr = (json.loads((RES / "translations.json").read_text(encoding="utf-8")) if partial else translate(shots))
+    rows, missing = [], []
     for lang in LANGS:
         for sid in SHOTS:
             text = shots[sid]["narration"] if lang == "am" else tr[sid][lang]
-            wav = speak(lang, sid, text, sb)
-            heard = transcribe(lang, sid, wav)
+            if partial:
+                wav = AUDIO / f"{lang}_{sid}.wav"
+                heard = cached_transcript(lang, sid)
+                if heard is None or not wav.exists():
+                    missing.append(f"{lang}_{sid}")
+                    continue
+            else:
+                wav = speak(lang, sid, text, sb)
+                heard = transcribe(lang, sid, wav)
             secs = gemini.wav_seconds(wav.read_bytes())
             rows.append({
                 "lang": lang, "shot": sid, "text": text, "transcript": heard.get("transcript", ""),
@@ -176,30 +193,41 @@ def run() -> None:
     summary = {}
     for lang, name in LANGS.items():
         rs = [r for r in rows if r["lang"] == lang]
-        summary[lang] = {"language": name,
+        if not rs:
+            summary[lang] = {"language": name, "mean_cer": None, "lang_id_correct": "0/0",
+                             "mean_chars_per_sec": None, "clips": 0}
+            continue
+        summary[lang] = {"language": name, "clips": len(rs),
                          "mean_cer": round(sum(r["cer"] for r in rs) / len(rs), 3),
                          "lang_id_correct": f"{sum(r['lang_id_ok'] for r in rs)}/{len(rs)}",
                          "mean_chars_per_sec": round(sum(r["chars_per_sec"] or 0 for r in rs) / len(rs), 1)}
-    (RES / "tts_roundtrip.json").write_text(json.dumps({"summary": summary, "rows": rows}, indent=2,
-                                                       ensure_ascii=False), encoding="utf-8")
-    md = ["# TTS round-trip results (gemini-3.8-flash-tts -> blind Gemini transcription)", "",
-          "| Language | Mean CER | Language ID correct | Chars/s |", "|---|---|---|---|"]
-    md += [f"| {v['language']} ({k}) | {v['mean_cer']:.3f} | {v['lang_id_correct']} | {v['mean_chars_per_sec']} |"
+    (RES / "tts_roundtrip.json").write_text(json.dumps({"summary": summary, "rows": rows, "partial": partial,
+                                                        "missing": missing}, indent=2, ensure_ascii=False),
+                                            encoding="utf-8")
+    md = ["# TTS round-trip results (gemini-3.8-flash-tts -> blind Gemini transcription)", ""]
+    if missing:
+        md += [f"**PARTIAL RESULT:** {len(rows)}/{len(rows) + len(missing)} clips completed. Not completed "
+               f"(Gemini free-tier 429 quota / 503 overload, FAILURES F-08): {', '.join(missing)}.", ""]
+    md += ["| Language | Clips | Mean CER | Language ID correct | Chars/s |", "|---|---|---|---|---|"]
+    md += [f"| {v['language']} ({k}) | {v['clips']} | "
+           f"{'n/a' if v['mean_cer'] is None else format(v['mean_cer'], '.3f')} | {v['lang_id_correct']} | "
+           f"{v['mean_chars_per_sec'] if v['mean_chars_per_sec'] is not None else 'n/a'} |"
            for k, v in summary.items()]
     md += ["", "| Lang | Shot | Sent to TTS | Transcribed back | Heard as | CER | Transcriber |",
            "|---|---|---|---|---|---|---|"]
     md += [f"| {r['lang']} | {r['shot']} | {r['text']} | {r['transcript']} | {r['heard_lang']} | "
            f"{r['cer']:.3f} | {r['asr_model']} |" for r in rows]
     (RES / "tts_roundtrip.md").write_text("\n".join(md) + "\n", encoding="utf-8")
-    print("\nSUMMARY")
+    print("\nSUMMARY" + (f" (PARTIAL: missing {missing})" if missing else ""))
     for k, v in summary.items():
-        print(f"  {v['language']:<12} mean CER {v['mean_cer']:.3f}  lang-ID {v['lang_id_correct']}  "
+        cer_txt = "n/a" if v["mean_cer"] is None else f"{v['mean_cer']:.3f}"
+        print(f"  {v['language']:<12} clips {v['clips']}  mean CER {cer_txt}  lang-ID {v['lang_id_correct']}  "
               f"{v['mean_chars_per_sec']} chars/s")
 
 
 if __name__ == "__main__":
     try:
-        run()
+        run(partial="--partial" in sys.argv)
     except StageError as exc:
         print(f"FAILED: {exc}")
         sys.exit(1)

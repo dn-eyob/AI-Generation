@@ -2,7 +2,7 @@
 
 Audience and intent are written here **before** anything is generated (first committed 2026-11-26, before any keyframe, clip or music generation).
 
-> **Story change (storyboard v8, 2026-11-26):** the film changed from *Three Rounds* (my family's coffee ceremony, sections 1–5 below) to *The King Who Built a Wonder in Stone* (Lalibela). The new brief and the honest consequences are in **section 6**, written and committed before any v8 asset was generated. Sections 1–5 are kept unchanged as the record of the first film; its storyboard and final exports are archived in `archive/three_rounds/`.
+> **The film is *The King Who Built a Wonder in Stone* (Lalibela, storyboard v8+): see section 6.** Sections 1–5 are the **pipeline-development record** (storyboard v1–v7, an earlier story used to build and user-test the pipeline). They are kept unchanged as evidence of the design process and User Test #1; that earlier film is not part of the submission.
 
 ## 1. Brief
 - **Working title:** *Three Rounds* (ሶስት ዙር)

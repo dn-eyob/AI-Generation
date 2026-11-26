@@ -1,6 +1,6 @@
 # ARCHITECTURE
 
-How `storyboard.json` becomes an 84.5-second film in 9:16 and 16:9, and why the pipeline is shaped this way. The same pipeline made two films from two storyboards: *Three Rounds* (v1–v7, archived) and *The King Who Built a Wonder in Stone* (v8+), which shows the stages are story-agnostic.
+How `storyboard.json` becomes an 84.5-second film in 9:16 and 16:9, and why the pipeline is shaped this way. The pipeline was developed on an earlier storyboard (v1–v7) and then produced this film from a completely new one (v8+) with no stage changes beyond small schema additions, which shows the stages are story-agnostic.
 
 ## 1. Overview
 
